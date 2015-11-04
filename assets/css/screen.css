@@ -1,1 +1,12 @@
  
+body {
+    padding: 2% 5% 2% 5%;
+}
+
+div.block {
+    width: 40%;
+    vertical-align: top;
+    display: inline-block;
+    margin-bottom: 10px;
+
+}
