@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 from django.contrib import admin
 admin.autodiscover()
 
-from hello.views import home, requests
+from hello.views import home
 
 urlpatterns = patterns(
     '',
@@ -12,5 +12,5 @@ urlpatterns = patterns(
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^$', home, name='home'),
-    url(r'^requests$', requests, name='requests'),
+
 )
