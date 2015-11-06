@@ -8,27 +8,38 @@ client = Client()
 
 
 class MainPageTest(TestCase):
-    def test_home_page(self):
+    def test_home_page_alive(self):
         """
         test if home page returns 200 ok
         """
         response = client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.content)
+
+    def test_home_page_content(self):
+        """
+        test if home page shows content
+        """
+        response = client.get(reverse('home'))
+        self.assertIn('<div class="block">', response.content)
+        self.assertIn('"/static/css/main.css"', response.content)
+        self.assertIn('<p>Name:', response.content)
+
+    def test_home_page_empty_db(self):
+        Info.objects.all().delete()
+        response = client.get(reverse('home'))
+        self.assertIn('<div class="block">', response.content)
+        self.assertIn('id="nodata"', response.content)
+        print response.content
 
 
 class InfoModelTest(TestCase):
-    def setUp(self):
-        Info.objects.create(name="John",
-                            surname="Doe",
-                            dob="1975-05-04",
-                            bio="Biography",
-                            email="mail@mail.com",
-                            jabber="ololo@xmmp.com",
-                            skype="johndoe",
-                            other="other")
+    fixtures = ['initial_data.json']
 
     def test_model(self):
-        john = Info.objects.get(name="John")
-        self.assertEqual(john.surname, 'Doe')
-        self.assertEqual(john.skype, 'johndoe')
-        self.assertEqual(john.other, 'other')
+        """
+        test info model
+        """
+        info = Info.objects.get()
+        self.assertEqual(info.surname, 'Lykov')
+        self.assertEqual(info.skype, 'testerotuco')

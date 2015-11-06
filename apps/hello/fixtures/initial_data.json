@@ -1,10 +1,10 @@
 [{"pk": 1, "model": "hello.info", "fields": {
 "dob": "1986-01-22", 
-"bio": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut", 
+"bio": "", 
 "surname": "Lykov", 
 "name": "Viktor", 
 "email": "yamabushi@ukr.net.",
 "jabber": "xonda@khavr.com",
 "skype": "testerotuco",
-"other": "mob.phone: 109277389437. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+"other": ""
 }}]

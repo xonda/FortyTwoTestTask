@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+    <title>{% block title %}{% endblock title %}</title>
+
+    {% block extra_head %}
+                <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+    {% endblock extra_head %}
+
+
+    {% block content %}
+
+            <h1>42 Coffee Cups Test Assignment</h1>
+
+
+            {% if not info.name %}<h3 id="nodata">{{ info }}</h3>{% endif %}
+
+
+
+            <div class="block">
+                <p>Name: {{ info.name }}</p>
+                <p>Last Name: {{ info.surname }}</p>
+                <p>Date of Birth: {{ info.dob }}</p>
+            </div>
+
+            <div class="block align-right">
+                <p>Contacts</p>
+                <p>Email: {{ info.email }}</p>
+                <p>Jabber: {{ info.jabber }}</p>
+                <p>Skype: {{ info.skype }}</p>
+            </div>
+
+            <div class="block">
+                <p>Biography:</p>
+                <textarea cols="40" rows="10">{{ info.bio }}</textarea>
+            </div>
+
+            <div class="block">
+                <p>Other Contacts:</p>
+                <textarea cols="40" rows="10">{{ info.other }}</textarea>
+            </div>
+
+        {% endblock content %}
+    </body>
+</html>
