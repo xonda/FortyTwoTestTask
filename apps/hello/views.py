@@ -10,4 +10,3 @@ def home(request):
 
     context = {'info': info}
     return render(request, 'home.html', context)
-

@@ -27,6 +27,9 @@ class MainPageTest(TestCase):
         self.assertIn('<p>Name:', response.content)
 
     def test_home_page_empty_db(self):
+        """
+        test home page when the db is empty
+        """
         Info.objects.all().delete()
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
@@ -65,7 +68,8 @@ class AdminSiteTests(TestCase):
         client.login(username='admin', password='admin')
         self.response = client.get('/admin/')
         self.assertIn("Site administration", self.response.content)
-        self.assertIn('<a href="/admin/hello/info/">Infos</a>', self.response.content)
+        self.assertIn('<a href="/admin/hello/info/">Infos</a>',
+                      self.response.content)
 
     def test_admin_Info_registered(self):
         """
@@ -73,14 +77,8 @@ class AdminSiteTests(TestCase):
         """
         self.user = User.objects.get()
         self.assertEqual(str(self.user), 'admin')
-        client.login(username='admin', password='admin')
+        client.login(username='admin',
+                     password='admin')
         self.response = client.get('/admin/')
-        self.assertIn('<a href="/admin/hello/info/">Infos</a>', self.response.content)
-
-
-
-
-
-
-
-
+        self.assertIn('<a href="/admin/hello/info/">Infos</a>',
+                      self.response.content)
