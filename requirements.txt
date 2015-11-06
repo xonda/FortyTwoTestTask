@@ -1,2 +1,9 @@
+42cc-pystyle==0.0.15
 Django==1.6.7
-42cc-pystyle
+South==1.0.2
+argparse==1.2.1
+flake8==2.5.0
+mccabe==0.3.1
+pep8==1.5.7
+pyflakes==1.0.0
+wsgiref==0.1.2
