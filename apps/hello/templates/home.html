@@ -2,8 +2,6 @@
 {% load static %}
 
 
-    <title>{% block title %}{% endblock title %}</title>
-
     {% block extra_head %}
                 <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
     {% endblock extra_head %}
@@ -42,5 +40,3 @@
             </div>
 
         {% endblock content %}
-    </body>
-</html>
