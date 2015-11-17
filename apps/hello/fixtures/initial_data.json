@@ -1,10 +1,10 @@
 [{"pk": 1, "model": "hello.info", "fields": {
 "dob": "1986-01-22", 
-"bio": "", 
+"bio": "Several words about myself. I've been working as online projects coordinator the last 7 years. Some time ago I started to learn python using MOOCs, books and documentation to automate routine processes. Now I intend to fully dive into development.", 
 "surname": "Lykov", 
 "name": "Viktor", 
 "email": "yamabushi@ukr.net.",
 "jabber": "xonda@khavr.com",
 "skype": "testerotuco",
-"other": ""
+"other": "ICQ: 228339308, Email: testerotuco@mail.ru, Yahoo: bitoc_coolpepper"
 }}]

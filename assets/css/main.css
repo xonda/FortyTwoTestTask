@@ -6,6 +6,10 @@ textarea {
     resize: none;
 }
 
+hr {
+    margin: 20px 0 20px 0;
+}
+
 div.block {
     width: 48%;
     vertical-align: top;
@@ -17,6 +21,8 @@ div.block {
     color: red;
 }
 
-hr {
-    margin: 20px 0 20px 0;
+
+.info_text {
+    max-width: 70%;
+    text-align: justify;
 }
