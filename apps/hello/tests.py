@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.test import Client
-from .models import Info
+from .models import Info, WebRequest
 
 
 client = Client()
@@ -82,3 +82,49 @@ class AdminSiteTests(TestCase):
         self.response = client.get('/admin/')
         self.assertIn('<a href="/admin/hello/info/">Infos</a>',
                       self.response.content)
+
+
+class RequestsPageTests(TestCase):
+    def test_page_is_available(self):
+        response = client.get('/requests')
+        self.assertEqual(response.status_code, 200)
+
+    def test_upd_request_not_ajax(self):
+        response = client.get('/upd_requests')
+        self.assertEqual(response.content, 'Not ajax request')
+
+    def test_upd_requests_ajax(self):
+        response = client.get('/upd_requests', HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('hello.webrequest', response.content)
+
+    def test_upd_request_db_empty(self):
+        WebRequest.objects.all().delete()
+        response = client.get('/upd_requests', HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.content, 'No records in database')
+
+
+
+
+
+
+class RequestsMiddlewareTest(TestCase):
+    def test_middleware_saves_requests(self):
+        client.get('/')
+        query = WebRequest.objects.get(pk=1)
+        self.assertTrue(query)
+        self.assertEqual(query.path, '/')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
