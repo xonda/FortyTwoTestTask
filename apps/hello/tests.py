@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
+
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.contrib.auth.models import User
 from django.test import Client
 from .models import Info
 
@@ -11,7 +12,7 @@ client = Client()
 class MainPageTest(TestCase):
     def test_home_page_alive(self):
         """
-        test if home page returns 200 ok
+        Test if home page returns 200 ok
         """
         response = client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
@@ -19,66 +20,45 @@ class MainPageTest(TestCase):
 
     def test_home_page_content(self):
         """
-        test if home page shows content
+        Test if home page shows content
         """
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
         self.assertIn('"/static/css/main.css"', response.content)
         self.assertIn('<p>Name:', response.content)
 
-    def test_home_page_empty_db(self):
+    def test_home_empty_db(self):
         """
-        test home page when the db is empty
+        Test home page when the db is empty
         """
         Info.objects.all().delete()
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
         self.assertIn('id="nodata"', response.content)
 
+    def test_unicode(self):
+        """
+        Test page when db record has Unicode
+        """
+        Info.objects.filter(pk__in=[1, 4]).delete()
+        response = client.get(reverse('home'))
+        self.assertIn('Name: Иван', response.content)
 
-class InfoModelTest(TestCase):
-    fixtures = ['initial_data.json']
+    def test_1_db_record(self):
+        """
+        Test page when there is one db record
+        """
+        Info.objects.filter(pk__in=[1, 3]).delete()
+        response = client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('Name', response.content)
+        self.assertNotIn('id="nodata', response.content)
 
-    def test_model(self):
+    def test_2_or_more_db_records(self):
         """
-        test info model
+        Test home page when there are 2 or more db records
         """
-        info = Info.objects.get()
-        self.assertEqual(info.surname, 'Lykov')
-        self.assertEqual(info.skype, 'testerotuco')
-
-
-class AdminSiteTests(TestCase):
-    fixtures = ['username.json']
-
-    def test_adminsite_login_redirect(self):
-        """
-        test if admin page redirects to login if logged out
-        """
-        response = client.get('/admin')
-        self.assertEqual(response.status_code, 301)
-        self.assertRedirects(response, '/admin/', status_code=301)
-
-    def test_admin_logged_in(self):
-        """
-        test login to admin page
-        """
-        self.user = User.objects.get()
-        self.assertEqual(str(self.user), 'admin')
-        client.login(username='admin', password='admin')
-        self.response = client.get('/admin/')
-        self.assertIn("Site administration", self.response.content)
-        self.assertIn('<a href="/admin/hello/info/">Infos</a>',
-                      self.response.content)
-
-    def test_admin_Info_registered(self):
-        """
-        test if Info class registered on admin site
-        """
-        self.user = User.objects.get()
-        self.assertEqual(str(self.user), 'admin')
-        client.login(username='admin',
-                     password='admin')
-        self.response = client.get('/admin/')
-        self.assertIn('<a href="/admin/hello/info/">Infos</a>',
-                      self.response.content)
+        response = client.get(reverse('home'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotIn('id="nodata', response.content)
+        self.assertContains(response, 'Name: Viktor')
