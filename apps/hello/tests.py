@@ -25,7 +25,7 @@ class MainPageTest(TestCase):
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
         self.assertIn('"/static/css/main.css"', response.content)
-        self.assertIn('<p>Name:', response.content)
+        self.assertIn('<p>Contacts</p>', response.content)
 
     def test_home_empty_db(self):
         """
@@ -35,6 +35,7 @@ class MainPageTest(TestCase):
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
         self.assertIn('id="nodata"', response.content)
+        self.assertIn('id="nodata"', response.content)
 
     def test_unicode(self):
         """
@@ -42,7 +43,7 @@ class MainPageTest(TestCase):
         """
         Info.objects.filter(pk__in=[1, 4]).delete()
         response = client.get(reverse('home'))
-        self.assertIn('Name: Иван', response.content)
+        self.assertIn('Иван', response.content)
 
     def test_1_db_record(self):
         """
@@ -61,4 +62,4 @@ class MainPageTest(TestCase):
         response = client.get(reverse('home'))
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('id="nodata', response.content)
-        self.assertContains(response, 'Name: Viktor')
+        self.assertContains(response, 'Viktor')
