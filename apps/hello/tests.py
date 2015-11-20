@@ -36,7 +36,6 @@ class MainPageTest(TestCase):
         self.assertIn('id="nodata"', response.content)
         self.assertIn('id="nodata"', response.content)
 
-
     def test_unicode(self):
         """
         Test page when db record has Unicode
