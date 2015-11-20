@@ -4,6 +4,7 @@
 
     {% block extra_head %}
         <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'js/requests.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -14,7 +15,7 @@
 
 {% block content %}
 
-        <table id="reqTable" class="table table-bordered">
+        <table id="reqTable" class="table table-bordered hidden">
             <thead>
                 <tr>
                     <td>#</td>
@@ -32,149 +33,7 @@
             <thead>
 
             <tbody>
-                <tr>
-                <td>1</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                        <tr>
-                    <td>2</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>6</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>7</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>8</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>9</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
-                <tr>
-                    <td>10</td>
-                    <td>2015-11-17 19:58:12.43</td>
-                    <td>127.0.0.1:8000</td>
-                    <td>/requests</td>
-                    <td>GET</td>
-                    <td>Mozilla/5.0 (X11; Linux i686)</td>
-                    <td>null</td>
-                    <td>{}</td>
-                    <td>false</td>
-                    <td>false</td>
-                    <td>admin</td>
-                </tr>
+
 
 
             </tbody>
