@@ -1,8 +1,41 @@
 {% extends 'base.html' %}
-{% block title %}Requests{% endblock title %}
+{% load static %}
+{% block title %}Requests | {% endblock title %}
+
+    {% block extra_head %}
+        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'js/requests.js' %}"></script>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Latest compiled and minified Pootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+    {% endblock extra_head %}
+
 
 {% block content %}
 
-{{ check }}
+        <table id="reqTable" class="table table-bordered hidden">
+            <thead>
+                <tr>
+                    <td>#</td>
+                    <td>Time</td>
+                    <td>Host</td>
+                    <td>Path</td>
+                    <td>Method</td>
+                    <td>User Agent</td>
+                    <td>GET</td>
+                    <td>POST</td>
+                    <td>Secure</td>
+                    <td>Ajax</td>
+                    <td>User</td>
+                </tr>
+            <thead>
+
+            <tbody>
+
+
+
+            </tbody>
 
 {% endblock content %}

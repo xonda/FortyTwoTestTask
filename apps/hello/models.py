@@ -13,3 +13,19 @@ class Info(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class WebRequest(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    host = models.CharField(max_length=20)
+    path = models.CharField(max_length=100)
+    method = models.CharField(max_length=10)
+    user_agent = models.CharField(max_length=1000, blank=True, null=True)
+    get = models.TextField(blank=True, null=True)
+    post = models.TextField(blank=True, null=True)
+    is_secure = models.BooleanField()
+    is_ajax = models.BooleanField()
+    user = models.CharField(max_length=20, blank=True)
+
+    def __unicode__(self):
+        return self.host

@@ -2,8 +2,10 @@
 Django==1.6.7
 South==1.0.2
 argparse==1.2.1
+chromedriver==2.19
 flake8==2.5.0
 mccabe==0.3.1
 pep8==1.5.7
 pyflakes==1.0.0
+selenium==2.48.0
 wsgiref==0.1.2

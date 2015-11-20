@@ -3,8 +3,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test import Client
-from .models import Info
-
+from .models import Info, WebRequest
 
 client = Client()
 
@@ -37,6 +36,7 @@ class MainPageTest(TestCase):
         self.assertIn('id="nodata"', response.content)
         self.assertIn('id="nodata"', response.content)
 
+
     def test_unicode(self):
         """
         Test page when db record has Unicode
@@ -63,3 +63,50 @@ class MainPageTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertNotIn('id="nodata', response.content)
         self.assertContains(response, 'Viktor')
+
+
+class RequestsPageTests(TestCase):
+    def test_page_is_available(self):
+        """
+        Test if requests page is availlable
+        """
+        response = client.get('/requests')
+        self.assertEqual(response.status_code, 200)
+
+    def test_upd_request_not_ajax(self):
+        """
+        Test update request with not ajax request
+        """
+        response = client.get('/upd_requests')
+        self.assertEqual(response.content, 'Not ajax request')
+
+    def test_upd_requests_ajax(self):
+        """
+        Test update requests with ajax request
+        """
+        response = client.get('/upd_requests',
+                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('hello.webrequest', response.content)
+        self.assertIn('"host": "testserver"', response.content)
+
+    def test_requests_content(self):
+        """
+        Test content served by requests view
+        """
+        response = client.get('/requests')
+        self.assertIn('Host', response.content)
+        self.assertIn('User Agent', response.content)
+        self.assertIn('Ajax', response.content)
+        self.assertIn('Requests | Site Name', response.content)
+
+
+class RequestsMiddlewareTest(TestCase):
+    def test_middleware_saves_requests(self):
+        """
+        Test if middleware saves requests in database
+        """
+        client.get('/')
+        query = WebRequest.objects.get(pk=1)
+        self.assertTrue(query)
+        self.assertEqual(query.path, '/')
+        self.assertEqual(query.host, 'testserver')
