@@ -1,6 +1,7 @@
 from django.test import TestCase
 from selenium import webdriver
 
+
 class RequestsPageTests(TestCase):
     def test_requests_page_content(self):
         """

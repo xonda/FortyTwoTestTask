@@ -3,9 +3,6 @@ from django.core.urlresolvers import reverse
 from django.test import Client
 from .models import Info, WebRequest
 
-
-
-
 client = Client()
 
 
@@ -56,7 +53,8 @@ class RequestsPageTests(TestCase):
         """
         Test update requests with ajax request
         """
-        response = client.get('/upd_requests', HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = client.get('/upd_requests',
+                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertIn('hello.webrequest', response.content)
         self.assertIn('"host": "testserver"', response.content)
 
@@ -81,18 +79,3 @@ class RequestsMiddlewareTest(TestCase):
         self.assertTrue(query)
         self.assertEqual(query.path, '/')
         self.assertEqual(query.host, 'testserver')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
