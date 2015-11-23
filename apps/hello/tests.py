@@ -67,32 +67,31 @@ class MainPageTest(TestCase):
 class RequestsPageTests(TestCase):
     def test_page_is_available(self):
         """
-        Test if requests page is availlable
+        Test if requests page is available
         """
-        response = client.get('/requests')
+        response = client.get(reverse('requests'))
         self.assertEqual(response.status_code, 200)
 
     def test_upd_request_not_ajax(self):
         """
         Test update request with not ajax request
         """
-        response = client.get('/upd_requests')
+        response = client.get(reverse('upd_requests'))
         self.assertEqual(response.content, 'Not ajax request')
 
     def test_upd_requests_ajax(self):
         """
         Test update requests with ajax request
         """
-        response = client.get('/upd_requests',
+        response = client.get(reverse('upd_requests'),
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertIn('hello.webrequest', response.content)
-        self.assertIn('"host": "testserver"', response.content)
+        self.assertEqual('No records in database', response.content)
 
     def test_requests_content(self):
         """
         Test content served by requests view
         """
-        response = client.get('/requests')
+        response = client.get(reverse('requests'))
         self.assertIn('Host', response.content)
         self.assertIn('User Agent', response.content)
         self.assertIn('Ajax', response.content)
@@ -104,7 +103,7 @@ class RequestsMiddlewareTest(TestCase):
         """
         Test if middleware saves requests in database
         """
-        client.get('/')
+        client.get(reverse('home'))
         query = WebRequest.objects.get(pk=1)
         self.assertTrue(query)
         self.assertEqual(query.path, '/')
