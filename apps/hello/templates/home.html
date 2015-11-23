@@ -15,14 +15,14 @@
             {% if not info.name %}<h3 id="nodata">{{ info }}</h3>{% endif %}
 
 
-
             <div class="block">
                 <p>{{ info.name }}</p>
                 <p>{{ info.surname }}</p>
                 <p>{{ info.dob }}</p>
+                <p>Photo:</p>
             </div>
 
-            <div class="block align-right">
+            <div class="block">
                 <p>Contacts</p>
                 <p>Email: {{ info.email }}</p>
                 <p>Jabber: {{ info.jabber }}</p>
@@ -30,14 +30,20 @@
             </div>
 
             <div class="block">
-                <p>Biography:</p>
-                <div class="info_text">{{ info.bio|linebreaks }}</div>
+                <img src="http://goo.gl/RTXKE8" alt="Photo" height="300" width="400">
             </div>
 
             <div class="block">
                 <p>Other Contacts:</p>
                 <div class="info_text">{{ info.other|linebreaks }}</div>
             </div>
+
+            <div class="block" id="bio">
+                <p>Biography:</p>
+                <div class="info_text">{{ info.bio|linebreaks }}</div>
+            </div>
+
+
 
         <hr size="2" color="black">
         <a href="{% url 'requests' %}">requests</a>

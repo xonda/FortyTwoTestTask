@@ -2,26 +2,32 @@ body {
     padding: 2% 5% 2% 5%;
 }
 
-textarea {
-    resize: none;
-}
-
 hr {
     margin: 20px 0 20px 0;
 }
 
 div.block {
-    width: 48%;
+    width: 40%;
+    min-height: 100px;
     vertical-align: top;
     display: inline-block;
     margin-bottom: 10px;
+    padding: 5px;
+    border: 1px solid black;
 }
 
 #nodata {
     color: red;
 }
 
-
 .info_text {
     max-width: 75%;
+}
+
+img {
+    /*border: 1px solid black;*/
+}
+
+#bio {
+    display: flex;
 }
