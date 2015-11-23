@@ -27,3 +27,7 @@ def upd_requests(request):
         else:
             return HttpResponse('No records in database')
     return HttpResponse('Not ajax request')
+
+
+def edit(request):
+    return render(request, 'edit_info.html')

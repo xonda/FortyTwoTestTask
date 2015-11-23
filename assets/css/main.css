@@ -3,31 +3,78 @@ body {
 }
 
 hr {
-    margin: 20px 0 20px 0;
+    margin: 10px 0 10px 0;
+    height: 2px;
+    background-color: black;
 }
 
 div.block {
-    width: 40%;
-    min-height: 100px;
+    width: 38%;
+    min-height: 150px;
     vertical-align: top;
     display: inline-block;
-    margin-bottom: 10px;
-    padding: 5px;
-    border: 1px solid black;
+    padding: 0 5px 0 5px;
+    /*border: 1px solid black;*/
+}
+
+div.form_block {
+    width: 38%;
+    min-height: 110px;
+    vertical-align: top;
+    display: inline-block;
+    padding: 0 5px 0 0;
+}
+
+div.buttons_block {
+    width: 38%;
+    vertical-align: bottom;
+    display: block;
+    /*margin: 10px 10px 0 0px;*/
 }
 
 #nodata {
     color: red;
 }
 
-.info_text {
-    max-width: 75%;
+#photo {
+    float: left;
+    margin-right: 4px;
+    min-height: 308px;
 }
 
-img {
-    /*border: 1px solid black;*/
+.header{
+    padding-top: 35px;
 }
 
-#bio {
-    display: flex;
+.container {
+    padding: 0;
+    margin: 0px 0 10px 0;
+}
+
+.field {
+    clear:both;
+    text-align: right;
+    line-height: 25px;
+}
+
+label {
+    float: left;
+    padding-right: 15px;
+    margin: 5px;
+}
+
+.main {
+    float:left;
+}
+
+textarea {
+   resize: none;
+}
+
+#my_photo {
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 10px 10px 0 0;
 }

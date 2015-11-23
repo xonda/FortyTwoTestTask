@@ -11,7 +11,7 @@ class RequestsPageTests(TestCase):
         driver.get("http://127.0.0.1:8000/requests")
         self.assertIn('Requests', driver.title)
         tbody = driver.find_element_by_tag_name("tbody")
-        self.assertIn(' /upd_requests ', tbody.text)
+        self.assertIn(' /requests ', tbody.text)
         self.assertIn(' GET ', tbody.text)
         self.assertIn(' {} ', tbody.text)
         driver.close()
