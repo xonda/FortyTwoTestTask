@@ -3,12 +3,16 @@
 
 
     {% block extra_head %}
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Latest compiled and minified Pootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+        <script src="{% static 'js/edit_info.js' %}"></script>
     {% endblock extra_head %}
 
 
@@ -21,44 +25,70 @@
                     </div>
             </div>
 
-            <form action="{% url 'edit' %}" method="post">
+            <form id="edit_form" action="{% url 'edit' %}" method="post">
+            {% csrf_token %}
 
                 <div class="form_block">
                     <div class="main">
-                        <div class="field"><label for="name">Name:</label><input type="text" id="name"/></div>
-                        <div class="field"><label for="last_name">Last name:</label><input type="text" id="last_name"/></div>
-                        <div class="field"><label for="dob">Date of birth:</label><input type="text" id="dob"/></div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.name.errors.as_text }}</span>
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.surname.errors.as_text }}</span>
+                            {{ form.surname.label_tag }}
+                            {{ form.surname }}
+                        </div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.dob.errors.as_text }}</span>
+                            {{ form.dob.label_tag }}
+                            {{ form.dob }}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form_block">
                     <div class="main">
-                        <div class="field"><label for="email">Email:</label><input type="email" id="email"/></div>
-                        <div class="field"><label for="jabber">Jabber:</label><input type="text" id="jabber"/></div>
-                        <div class="field"><label for="skype">Skype:</label><input type="text" id="skype"/></div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.email.errors.as_text }}</span>
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.jabber.errors.as_text }}</span>
+                            {{ form.jabber.label_tag }}
+                            {{ form.jabber }}
+                        </div>
+                        <div class="field">
+                            <span class="text-danger">{{ form.skype.errors.as_text }}</span>
+                            {{ form.skype.label_tag }}
+                            {{ form.skype }}
+                        </div>
                     </div>
                 </div>
 
                 <div class="form_block" id="photo">
                     <div class="main">
-                        <div class="field"><label for="my_photo">Photo:</label><input type="file" id="my_photo"/></div>
+                        <div class="field">{{ form.photo.label_tag }}{{ form.photo }}</div>
                     </div>
                     <img src="http://goo.gl/RTXKE8" alt="Photo" height="300" width="400">
 
                 </div>
 
                 <div class="form_block">
-                    <b><p>Other Contacts:</p></b>
-                    <textarea rows="6" cols="45" name="other"></textarea>
+                    <b><p>Other contacts:</b> <span class="text-danger">{{ form.email.errors.as_text }}</span></p>
+                    {{ form.other }}
                 </div>
 
                 <div class="form_block">
-                    <b><p>Biography:</p></b>
-                    <textarea rows="6" cols="45" name="bio"></textarea>
+                    <b><p>Biography:</b> <span class="text-danger">{{ form.email.errors.as_text }}</span></p>
+                    {{ form.bio }}
                 </div>
 
                 <div class="buttons_block">
                     <button type="submit">Save</button>
+                    <button type="reset">Reset</button>
                     <a href="{% url 'home' %}">Cancel</a>
                 </div>
             </form>

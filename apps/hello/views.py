@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.core import serializers
 from .models import Info, WebRequest
+from .forms import InfoForm
 
 
 def home(request):
@@ -29,5 +30,14 @@ def upd_requests(request):
     return HttpResponse('Not ajax request')
 
 
-def edit(request):
-    return render(request, 'edit_info.html')
+def edit_info(request):
+    form = InfoForm(request.POST or None)
+    if form.is_valid():
+        print request.POST
+        form.save()
+
+    form = InfoForm()
+    context = {
+        'form': form,
+    }
+    return render(request, 'edit_info.html', context)
