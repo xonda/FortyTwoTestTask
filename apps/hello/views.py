@@ -1,5 +1,6 @@
 import time
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.core import serializers
 from .models import Info, WebRequest
@@ -30,7 +31,7 @@ def upd_requests(request):
             return HttpResponse('No records in database')
     return HttpResponse('Not ajax request')
 
-
+@login_required()
 def edit_info(request):
     try:
         info = Info.objects.all()[0]
@@ -39,9 +40,7 @@ def edit_info(request):
     form = InfoForm(request.POST or None, request.FILES or None, instance=info)
     if form.is_valid():
         form.save()
-        print 'form save passed'
         if request.is_ajax():
-            print 'ajax passed'
             time.sleep(3)
             return render(request, 'update_success.html')
         else:

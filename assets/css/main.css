@@ -29,7 +29,7 @@ div.buttons_block {
     width: 38%;
     vertical-align: bottom;
     display: block;
-    /*margin: 10px 10px 0 0px;*/
+    margin: 10px 10px 0 0px;
 }
 
 #nodata {
@@ -40,10 +40,18 @@ div.buttons_block {
     float: left;
     margin-right: 4px;
     min-height: 308px;
+    text-align: center;
 }
 
 .header{
     padding-top: 35px;
+    display: inline;
+    text-align: center;
+}
+
+.header a {
+    margin: 0 10px 0 10px;
+    display: inline;
 }
 
 .container {

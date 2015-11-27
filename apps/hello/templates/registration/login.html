@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+    {% block title %}Log in | {% endblock title %}
+
+    {% block extra_head %}
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Latest compiled and minified Pootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/login.css' %}"/>
+    {% endblock extra_head %}
+
+
+
+    {% block content %}
+
+	<div class="login">
+    <div class="login-screen">
+
+    <div class="app-title">
+        <h1>42 Test Login</h1>
+	</div>
+
+    <div class="login-form">
+        {% if form.errors %}
+        <p>Your username and password didn't match. Please try again.</p>
+        {% endif %}
+
+        <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+
+
+        <div class="control-group">
+            <input id="username" maxlength="254" name="username" placeholder="username" type="text">
+        </div>
+
+
+        <div class="control-group">
+            <input id="password" name="password" placeholder="password" type="password">
+        </div>
+        <input class="btn btn-primary btn-large btn-block" type="submit" value="login" />
+        <input type="hidden" name="next" value="{{ next }}" />
+        </form>
+    </div>
+    </div>
+    </div>
+
+    {% endblock content %}

@@ -110,11 +110,49 @@ class RequestsMiddlewareTest(TestCase):
         self.assertEqual(query.path, '/')
         self.assertEqual(query.host, 'testserver')
 
+
 class EditInfoPageTests(TestCase):
     def test_edit_page_available(self):
         """
-        Test if home page returns 200 ok
+        Test if edit info page returns 200 ok
         """
         response = client.get(reverse('edit_info'))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.content)
+
+    def test_edit_info_empty_db(self):
+        """
+        Test edit page when the db is empty
+        """
+        Info.objects.all().delete()
+        response = client.get(reverse('edit_info'))
+        self.assertEqual(response.content, 'No records in database')
+
+    def test_first_object_data_loaded(self):
+        """
+        Test if first object data is loaded to form
+        """
+        record = Info.objects.all()[0]
+        response = client.get(reverse('edit_info'))
+        self.assertIn(record.name, response.content)
+        self.assertIn(record.skype, response.content)
+        self.assertIn(record.email, response.content)
+
+    def test_unicode(self):
+        """
+        Test edit info page when db record has Unicode
+        """
+        Info.objects.filter(pk__in=[1, 4]).delete()
+        response = client.get(reverse('edit_info'))
+        self.assertIn('Иван', response.content)
+
+    def test_edit_with_1_db_record(self):
+        """
+        Test edit page when there is one db record
+        """
+        Info.objects.filter(pk__in=[1, 3]).delete()
+        record = Info.objects.all()[0]
+        response = client.get(reverse('edit_info'))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(record.name, response.content)
+        self.assertNotIn('No records in database', response.content)
