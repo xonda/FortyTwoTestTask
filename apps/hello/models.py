@@ -1,4 +1,6 @@
 from django.db import models
+from PIL import Image
+import math
 
 
 class Info(models.Model):
@@ -10,8 +12,23 @@ class Info(models.Model):
     jabber = models.CharField(max_length=20, blank=True)
     skype = models.CharField(max_length=20, blank=True)
     other = models.TextField(max_length=200, blank=True)
-    photo = models.ImageField(upload_to='info',
-                              default='/uploads/default_image.jpg')
+    photo = models.ImageField(upload_to='info', default='default_image.jpg')
+
+    def save(self):
+        super(Info, self).save()
+        pw = self.photo.width
+        ph = self.photo.height
+
+        mw = 200
+        mh = 200
+        if pw > mw or ph > mh:
+            try:
+                filename = str(self.photo.path)
+                image = Image.open(filename)
+                image.thumbnail((mw, mh), Image.ANTIALIAS)
+                image.save(filename)
+            except IOError:
+                print 'oops'
 
     def __unicode__(self):
         return self.name

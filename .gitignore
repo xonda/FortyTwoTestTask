@@ -5,6 +5,8 @@
 *.swo
 *.swn
 *.esproj
+*.jpg
+*.png
 .idea
 .Ds_Store
 *~

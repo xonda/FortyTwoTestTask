@@ -86,3 +86,14 @@ button {
 input{
     line-height: 25px;
 }
+
+.blink {
+    margin-left: 10px;
+    color: red;
+}
+
+#edit_success {
+    text-align: center;
+    font-size:  large;
+    margin: 200px 0 200px 0;
+}

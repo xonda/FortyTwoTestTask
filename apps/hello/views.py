@@ -1,4 +1,5 @@
-from django.shortcuts import render
+import time
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.core import serializers
 from .models import Info, WebRequest
@@ -31,13 +32,23 @@ def upd_requests(request):
 
 
 def edit_info(request):
-    form = InfoForm(request.POST or None)
+    try:
+        info = Info.objects.all()[0]
+    except:
+        return HttpResponse('No records in database')
+    form = InfoForm(request.POST or None, request.FILES or None, instance=info)
     if form.is_valid():
-        print request.POST
         form.save()
-
-    form = InfoForm()
+        print 'form save passed'
+        if request.is_ajax():
+            print 'ajax passed'
+            time.sleep(3)
+            return render(request, 'update_success.html')
+        else:
+            return redirect('home')
     context = {
         'form': form,
     }
     return render(request, 'edit_info.html', context)
+
+

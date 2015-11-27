@@ -5,7 +5,7 @@
     {% block extra_head %}
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
         <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
-        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
         <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
@@ -25,7 +25,8 @@
                     </div>
             </div>
 
-            <form id="edit_form" action="{% url 'edit' %}" method="post">
+            <form id="edit_form" action="{% url 'edit_info' %}" enctype="multipart/form-data" method="post">
+            <div id="ajaxwrapper">
             {% csrf_token %}
 
                 <div class="form_block">
@@ -72,7 +73,7 @@
                     <div class="main">
                         <div class="field">{{ form.photo.label_tag }}{{ form.photo }}</div>
                     </div>
-                    <img src="http://goo.gl/RTXKE8" alt="Photo" height="300" width="400">
+                    <img id="preview" src="" alt="Photo preview" height="300" width="400">
 
                 </div>
 
@@ -88,12 +89,13 @@
 
                 <div class="buttons_block">
                     <button type="submit">Save</button>
-                    <button type="reset">Reset</button>
                     <a href="{% url 'home' %}">Cancel</a>
                 </div>
+            </div>
             </form>
+
+
 
         <hr>
         <a href="{% url 'requests' %}">requests</a>
-
         {% endblock content %}

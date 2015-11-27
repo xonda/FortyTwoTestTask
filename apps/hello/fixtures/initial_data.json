@@ -7,12 +7,12 @@
         "surname": "Lykov", 
         "name": "Viktor", 
         "dob": "1986-01-22", 
+        "photo": "info/IMG_1364.png", 
         "other": "ICQ: 228339308\r\nEmail: testerotuco@mail.ru\r\nYahoo: bitoc_coolpepper", 
         "skype": "testerotuco", 
         "jabber": "xonda@khavr.com", 
         "email": "yamabushi@ukr.net"
     }
-
 },
 {
     "pk": 3, 
@@ -22,6 +22,7 @@
         "surname": "\u0418\u0432\u0430\u043d\u043e\u0432", 
         "name": "\u0418\u0432\u0430\u043d", 
         "dob": "2015-11-18", 
+        "photo": "default_image.jpg", 
         "other": "\u0421\u0442\u0440\u043e\u043a\u0430\r\n\u0421\u0442\u0440\u043e\u043a\u0430\r\n\u0421\u0442\u0440\u043e\u043a\u0430", 
         "skype": "\u0441\u043a\u0430\u0439\u043f", 
         "jabber": "\u0434\u0436\u0430\u0431\u0431\u0431\u0435\u0440", 
@@ -36,11 +37,11 @@
         "surname": "Smith", 
         "name": "John", 
         "dob": "2015-11-18", 
+        "photo": "default_image.jpg", 
         "other": "Line 1\r\nLine 2\r\nLine 3", 
         "skype": "jsmith", 
         "jabber": "jabber@jabber.com", 
         "email": "jsmith@gmail.com"
     }
-
 }
 ]

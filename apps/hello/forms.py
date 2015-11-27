@@ -14,6 +14,7 @@ class InfoForm(forms.ModelForm):
     email = forms.EmailField(required=True)
     jabber = forms.CharField(required=True)
     skype = forms.CharField(required=True)
+    photo = forms.ImageField()
 
     class Meta:
         model = Info
