@@ -14,4 +14,3 @@ urlpatterns = patterns(
     url(r'^upd_requests$', upd_requests, name='upd_requests'),
     url(r'^edit$', edit_info, name='edit_info'),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

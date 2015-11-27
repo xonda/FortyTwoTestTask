@@ -50,5 +50,3 @@ def edit_info(request):
         'form': form,
     }
     return render(request, 'edit_info.html', context)
-
-

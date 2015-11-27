@@ -1,6 +1,5 @@
 from django.db import models
 from PIL import Image
-import math
 
 
 class Info(models.Model):

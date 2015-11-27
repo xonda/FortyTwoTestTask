@@ -109,3 +109,12 @@ class RequestsMiddlewareTest(TestCase):
         self.assertTrue(query)
         self.assertEqual(query.path, '/')
         self.assertEqual(query.host, 'testserver')
+
+class EditInfoPageTests(TestCase):
+    def test_edit_page_available(self):
+        """
+        Test if home page returns 200 ok
+        """
+        response = client.get(reverse('edit_info'))
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.content)
