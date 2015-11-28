@@ -14,7 +14,6 @@ div.block {
     vertical-align: top;
     display: inline-block;
     padding: 0 5px 0 5px;
-    /*border: 1px solid black;*/
 }
 
 div.form_block {
@@ -100,8 +99,12 @@ input{
     color: red;
 }
 
-#edit_success {
-    text-align: center;
-    font-size:  large;
-    margin: 200px 0 200px 0;
+img#preview {
+    width: 100%;
+}
+
+#ajaxwrapper {
+    display: inline;
+    color:  green;
+    margin-left: 10px;
 }

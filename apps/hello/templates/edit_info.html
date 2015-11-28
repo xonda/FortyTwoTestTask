@@ -26,7 +26,7 @@
             </div>
 
             <form id="edit_form" action="{% url 'edit_info' %}" enctype="multipart/form-data" method="post">
-            <div id="ajaxwrapper">
+
             {% csrf_token %}
 
                 <div class="form_block">
@@ -74,7 +74,6 @@
                         <div class="field">{{ form.photo.label_tag }}{{ form.photo }}</div>
                     </div>
                     <img id="preview" src="" alt="Photo preview" height="300" width="400">
-
                 </div>
 
                 <div class="form_block">
@@ -90,8 +89,9 @@
                 <div class="buttons_block">
                     <button type="submit">Save</button>
                     <a href="{% url 'home' %}">Cancel</a>
+                    <div id="ajaxwrapper"></div>
                 </div>
-            </div>
+
             </form>
 
 

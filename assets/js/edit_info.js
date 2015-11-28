@@ -6,7 +6,7 @@ $(document).ready(function(){
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result);
+            $('#preview').attr('src', e.target.result).css({"width": "auto"});
         };
         reader.readAsDataURL(input.files[0]);
         }
@@ -15,6 +15,7 @@ $(document).ready(function(){
     $("#id_photo").change(function(){
         readURL(this);
     });
+
 
 
     var cookieName = 'csrftoken';
@@ -65,6 +66,7 @@ $(document).ready(function(){
     $('#edit_form').ajaxForm(edit_info_options);
 
     function beforeSubmit(formData, jqForm, options) {
+          $('#ajaxwrapper').empty();
           $(":input").attr('disabled', true);
           $(".buttons_block").append('<span class="blink">Saving Info, please wait... </span>');
           setInterval(blinker, 500);
@@ -73,6 +75,7 @@ $(document).ready(function(){
 
     function submitSuccess(responseText, statusText, xhr, $form)  {
         $(":input").attr('disabled', false)
+        $(".blink").remove();
     }
 
 

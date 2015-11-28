@@ -31,6 +31,7 @@ def upd_requests(request):
             return HttpResponse('No records in database')
     return HttpResponse('Not ajax request')
 
+
 @login_required()
 def edit_info(request):
     try:
@@ -42,7 +43,7 @@ def edit_info(request):
         form.save()
         if request.is_ajax():
             time.sleep(3)
-            return render(request, 'update_success.html')
+            return HttpResponse('Changes have been saved')
         else:
             return redirect('home')
     context = {
