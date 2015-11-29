@@ -4,6 +4,7 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test import Client
 from .models import Info, WebRequest
+from django.contrib.auth.models import User
 
 client = Client()
 
@@ -112,10 +113,20 @@ class RequestsMiddlewareTest(TestCase):
 
 
 class EditInfoPageTests(TestCase):
+    fixtures = ['username.json']
+
     def test_edit_page_available(self):
         """
-        Test if edit info page returns 200 ok
+        Test if edit info page redirects to login
         """
+        response = client.get(reverse('edit_info'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_edit_page_available_logged_in(self):
+        """
+        Test if edit info page returns 200 ok when logged in
+        """
+        client.login(username='admin', password='admin')
         response = client.get(reverse('edit_info'))
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.content)
@@ -125,6 +136,7 @@ class EditInfoPageTests(TestCase):
         Test edit page when the db is empty
         """
         Info.objects.all().delete()
+        client.login(username='admin', password='admin')
         response = client.get(reverse('edit_info'))
         self.assertEqual(response.content, 'No records in database')
 
@@ -133,6 +145,7 @@ class EditInfoPageTests(TestCase):
         Test if first object data is loaded to form
         """
         record = Info.objects.all()[0]
+        client.login(username='admin', password='admin')
         response = client.get(reverse('edit_info'))
         self.assertIn(record.name, response.content)
         self.assertIn(record.skype, response.content)
@@ -143,6 +156,7 @@ class EditInfoPageTests(TestCase):
         Test edit info page when db record has Unicode
         """
         Info.objects.filter(pk__in=[1, 4]).delete()
+        client.login(username='admin', password='admin')
         response = client.get(reverse('edit_info'))
         self.assertIn('Иван', response.content)
 
@@ -152,6 +166,7 @@ class EditInfoPageTests(TestCase):
         """
         Info.objects.filter(pk__in=[1, 3]).delete()
         record = Info.objects.all()[0]
+        client.login(username='admin', password='admin')
         response = client.get(reverse('edit_info'))
         self.assertEqual(response.status_code, 200)
         self.assertIn(record.name, response.content)
