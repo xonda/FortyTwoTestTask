@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.test import Client
 from .models import Info, WebRequest
-from django.contrib.auth.models import User
 
 client = Client()
 
