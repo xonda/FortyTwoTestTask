@@ -12,7 +12,6 @@
         "jabber": "xonda@khavr.com", 
         "email": "yamabushi@ukr.net"
     }
-
 },
 {
     "pk": 3, 
@@ -41,6 +40,5 @@
         "jabber": "jabber@jabber.com", 
         "email": "jsmith@gmail.com"
     }
-
 }
 ]

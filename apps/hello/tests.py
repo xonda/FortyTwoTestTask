@@ -87,16 +87,6 @@ class RequestsPageTests(TestCase):
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual('No records in database', response.content)
 
-    def test_requests_content(self):
-        """
-        Test content served by requests view
-        """
-        response = client.get(reverse('requests'))
-        self.assertIn('Host', response.content)
-        self.assertIn('User Agent', response.content)
-        self.assertIn('Ajax', response.content)
-        self.assertIn('Requests | Site Name', response.content)
-
 
 class RequestsMiddlewareTest(TestCase):
     def test_middleware_saves_requests(self):
