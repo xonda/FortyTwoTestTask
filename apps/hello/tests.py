@@ -85,8 +85,7 @@ class RequestsPageTests(TestCase):
         """
         response = client.get('/upd_requests',
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertIn('hello.webrequest', response.content)
-        self.assertIn('"host": "testserver"', response.content)
+        self.assertIn('No records in database', response.content)
 
     def test_requests_content(self):
         """
