@@ -20,8 +20,8 @@
                         <div class="col-lg-6"><h1>42 Coffee Cups Test Assignment</h1></div>
                         <div class="col-lg-6 header">
                             {% if user.is_authenticated %}
-                                <a href="{% edit_in_admin info %}">Edit in admin</a>
                                 <a href="{% url 'edit_info' %}">Edit</a>
+                                <a href="{% edit_in_admin info %}">(admin)</a>
                                 <a href="{% url 'logout' %}">Logout</a>
                             {% else %}
                                 <a href="{% url 'login' %}">Login</a>
