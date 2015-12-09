@@ -1,5 +1,6 @@
 from django.test import TestCase
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 
 class RequestsPageTests(TestCase):
@@ -16,6 +17,33 @@ class RequestsPageTests(TestCase):
         self.assertIn(' /requests ', tbody.text)
         self.assertIn(' GET ', tbody.text)
         self.assertIn(' {} ', tbody.text)
+
+    def tearDown(self):
+        self.driver.close()
+
+
+class HomePageTests(TestCase):
+    def setUp(self):
+        self.driver = webdriver.Chrome()
+
+    def test_edit_in_admi_tag(self):
+        """
+        Test if edit_in_admi tag drives to pbject admin page
+        """
+        self.driver.get("http://127.0.0.1:8000/login/")
+        elem = self.driver.find_element_by_name("username")
+        elem.send_keys("admin")
+        elem = self.driver.find_element_by_name("password")
+        elem.send_keys("admin" + Keys.RETURN)
+
+        admin_link = self.driver.find_element_by_link_text("(admin)")
+        admin_link.click()
+
+        self.assertIn('Django site admin', self.driver.title)
+        admin_body = self.driver.find_element_by_tag_name("body").text
+        self.assertIn('Viktor', admin_body)
+        self.assertIn('testerotuco@mail.ru', admin_body)
+        self.assertIn('testerotuco@mail.ru', admin_body)
 
     def tearDown(self):
         self.driver.close()
