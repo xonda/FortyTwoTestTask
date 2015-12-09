@@ -83,10 +83,9 @@ class RequestsPageTests(TestCase):
         """
         Test update requests with ajax request
         """
-        response = client.get('/upd_requests',
+        response = client.get(reverse('upd_requests'),
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertIn('hello.webrequest', response.content)
-        self.assertIn('"host": "testserver"', response.content)
+        self.assertEqual('No records in database', response.content)
 
     def test_requests_content(self):
         """
