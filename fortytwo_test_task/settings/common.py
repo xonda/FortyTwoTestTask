@@ -133,3 +133,5 @@ SOUTH_TESTS_MIGRATE = False
 
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/login/'
+
+TEST_RUNNER = 'django_selenium.selenium_runner.SeleniumTestRunner'
