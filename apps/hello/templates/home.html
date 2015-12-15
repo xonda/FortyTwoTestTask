@@ -16,7 +16,7 @@
     {% block content %}
 
             <div class="container">
-                    <div class="row">
+                    <div class="row" id="navbar">
                         <div class="col-lg-6"><h1>42 Coffee Cups Test Assignment</h1></div>
                         <div class="col-lg-6 header">
                             {% if user.is_authenticated %}
@@ -27,13 +27,13 @@
                             {% endif %}
                         </div>
                     </div>
-            </div>
+
 
 
                 {% if not info.name %}<h3 id="nodata">{{ info }}</h3>{% endif %}
 
-
-                <div class="block">
+            <div id="main-content">
+                <div class="block" id="name-block">
                     <p>{{ info.name }}</p>
                     <p>{{ info.surname }}</p>
                     <p>{{ info.dob }}</p>
@@ -60,10 +60,8 @@
                     <p>Biography:</p>
                     <div>{{ info.bio|linebreaks }}</div>
                 </div>
-
-
-
-
+            </div>
+            </div>
 
         <hr>
         <a href="{% url 'requests' %}">requests</a>
