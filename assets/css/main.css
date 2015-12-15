@@ -2,26 +2,109 @@ body {
     padding: 2% 5% 2% 5%;
 }
 
-textarea {
-    resize: none;
-}
-
 hr {
-    margin: 20px 0 20px 0;
+    margin: 10px 0 10px 0;
+    height: 2px;
+    background-color: black;
 }
 
 div.block {
-    width: 48%;
+    width: 38%;
+    min-height: 150px;
     vertical-align: top;
     display: inline-block;
-    margin-bottom: 10px;
+    padding: 0 5px 0 5px;
+}
+
+div.form_block {
+    width: 38%;
+    min-height: 110px;
+    vertical-align: top;
+    display: inline-block;
+    padding: 10px 5px 0 0;
+}
+
+div.buttons_block {
+    width: 38%;
+    vertical-align: bottom;
+    display: block;
+    margin: 10px 10px 0 0px;
 }
 
 #nodata {
     color: red;
 }
 
+#photo {
+    float: left;
+    margin-right: 4px;
+    min-height: 308px;
+    text-align: center;
+}
 
-.info_text {
-    max-width: 75%;
+.header{
+    padding-top: 35px;
+    display: inline;
+    text-align: center;
+}
+
+.header a {
+    margin: 0 10px 0 10px;
+    display: inline;
+}
+
+.container {
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.field {
+    clear:both;
+    text-align: right;
+    line-height: 25px;
+}
+
+label {
+    float: left;
+    padding-right: 15px;
+    margin: 5px;
+}
+
+.main {
+    float:left;
+}
+
+textarea {
+   resize: none;
+}
+
+#my_photo {
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 10px 10px 0 0;
+}
+
+.text_danger {
+    float: left;
+}
+
+input{
+    line-height: 25px;
+}
+
+.blink {
+    margin-left: 10px;
+    color: red;
+}
+
+img#preview {
+    width: 100%;
+}
+
+#ajaxwrapper {
+    display: inline;
+    color:  green;
+    margin-left: 10px;
 }
