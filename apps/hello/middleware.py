@@ -1,4 +1,5 @@
 import json
+from django.core.urlresolvers import reverse
 from models import WebRequest
 
 
@@ -7,7 +8,7 @@ class SaveRequest(object):
         """
         Saves each request to db
         """
-        if not request.path == '/upd_requests':
+        if not request.path == reverse('upd_requests'):
             WebRequest(
                 host=request.get_host(),
                 path=request.path,
@@ -19,5 +20,3 @@ class SaveRequest(object):
                 is_ajax=request.is_ajax(),
                 user=request.user
             ).save()
-
-        return None
