@@ -44,7 +44,8 @@ def edit_info(request):
     if form.is_valid():
         form.save()
         try:
-            os.remove(previous_photo)
+            if previous_photo != info.photo.path:
+                os.remove(previous_photo)
         except Exception, e:
             print str(e)
         if request.is_ajax():
