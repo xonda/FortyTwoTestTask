@@ -41,7 +41,7 @@
                 </div>
 
                 <div class="block">
-                    <p>Contacts</p>
+                    <h4>Contacts</h4>
                     <p>Email: {{ info.email }}</p>
                     <p>Jabber: {{ info.jabber }}</p>
                     <p>Skype: {{ info.skype }}</p>
@@ -52,18 +52,18 @@
                 </div>
 
                 <div class="block">
-                    <p>Other Contacts:</p>
+                    <h4>Other Contacts:</h4>
                     <div>{{ info.other|linebreaks }}</div>
                 </div>
 
                 <div class="block">
-                    <p>Biography:</p>
+                    <h4>Biography:</h4>
                     <div>{{ info.bio|linebreaks }}</div>
                 </div>
             </div>
             </div>
 
         <hr>
-        <a href="{% url 'requests' %}">requests</a>
+        <a href="{% url 'requests' %}" class="btn" id="req-btn" role="button">Requests</a>
 
         {% endblock content %}

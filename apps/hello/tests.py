@@ -24,7 +24,7 @@ class MainPageTest(TestCase):
         response = client.get(reverse('home'))
         self.assertIn('<div class="block">', response.content)
         self.assertIn('"/static/css/main.css"', response.content)
-        self.assertIn('<p>Contacts</p>', response.content)
+        self.assertIn('<h4>Contacts</h4>', response.content)
 
     def test_home_empty_db(self):
         """

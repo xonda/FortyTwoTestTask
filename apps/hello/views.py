@@ -1,4 +1,5 @@
 import time
+import os
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
@@ -36,11 +37,16 @@ def upd_requests(request):
 def edit_info(request):
     try:
         info = Info.objects.all()[0]
+        previous_photo = info.photo.path
     except:
         return HttpResponse('No records in database')
     form = InfoForm(request.POST or None, request.FILES or None, instance=info)
     if form.is_valid():
         form.save()
+        try:
+            os.remove(previous_photo)
+        except Exception, e:
+            print str(e)
         if request.is_ajax():
             time.sleep(3)
             return HttpResponse('Changes have been saved')

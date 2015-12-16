@@ -6,7 +6,7 @@ $(document).ready(function(){
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            $('#preview').attr('src', e.target.result).css({"width": "auto"});
+            $('#preview').attr('src', e.target.result).css({"width": "auto", "height": "auto"});
         };
         reader.readAsDataURL(input.files[0]);
         }

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load staticfiles %}
 
 
     {% block extra_head %}
@@ -20,11 +20,11 @@
     {% block content %}
 
             <div class="container">
-                    <div class="row">
+                    <div class="row" id="navbar">
                         <div class="col-lg-8"><h1>42 Coffee Cups Test Assignment</h1></div>
                     </div>
-            </div>
 
+            <div id="edit-main-content">
             <form id="edit_form" action="{% url 'edit_info' %}" enctype="multipart/form-data" method="post">
 
             {% csrf_token %}
@@ -93,9 +93,10 @@
                 </div>
 
             </form>
-
+            </div>
+            </div>
 
 
         <hr>
-        <a href="{% url 'requests' %}">requests</a>
+        <a href="{% url 'requests' %}" class="btn" id="req-btn" role="button">Requests</a>
         {% endblock content %}
