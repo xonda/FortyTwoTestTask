@@ -16,7 +16,7 @@
     {% block content %}
 
             <div class="container">
-                    <div class="row">
+                    <div class="row" id="navbar">
                         <div class="col-lg-6"><h1>42 Coffee Cups Test Assignment</h1></div>
                         <div class="col-lg-6 header">
                             {% if user.is_authenticated %}
@@ -28,13 +28,13 @@
                             {% endif %}
                         </div>
                     </div>
-            </div>
 
 
                 {% if not info.name %}<h3 id="nodata">{{ info }}</h3>{% endif %}
 
 
-                <div class="block">
+            <div id="main-content">
+                <div class="block" id="name-block">
                     <p>{{ info.name }}</p>
                     <p>{{ info.surname }}</p>
                     <p>{{ info.dob }}</p>
@@ -42,7 +42,7 @@
                 </div>
 
                 <div class="block">
-                    <p>Contacts</p>
+                    <h4>Contacts</h4>
                     <p>Email: {{ info.email }}</p>
                     <p>Jabber: {{ info.jabber }}</p>
                     <p>Skype: {{ info.skype }}</p>
@@ -53,20 +53,18 @@
                 </div>
 
                 <div class="block">
-                    <p>Other Contacts:</p>
+                    <h4>Other Contacts:</h4>
                     <div>{{ info.other|linebreaks }}</div>
                 </div>
 
                 <div class="block">
-                    <p>Biography:</p>
+                    <h4>Biography:</h4>
                     <div>{{ info.bio|linebreaks }}</div>
                 </div>
-
-
-
-
+            </div>
+            </div>
 
         <hr>
-        <a href="{% url 'requests' %}">requests</a>
+        <a href="{% url 'requests' %}" class="btn" id="req-btn" role="button">Requests</a>
 
         {% endblock content %}

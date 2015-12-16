@@ -38,7 +38,7 @@ $(document).ready(function(){
 
 
         if (document.hidden) {
-            if (last_number < data[0].pk) {
+            if (last_number < data[0].pk && last_number != 0) {
                 new_count += data[0].pk - last_number;
                 $('title').text('(' + new_count + ') ' + title);
             }

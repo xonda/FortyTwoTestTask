@@ -1,19 +1,32 @@
 body {
     padding: 2% 5% 2% 5%;
+    background-color: #3498DB;
 }
 
 hr {
-    margin: 10px 0 10px 0;
+    margin: 10px 0 10px 23px;
     height: 2px;
-    background-color: black;
+    width: 96.5%;
+}
+
+#navbar h1 {
+    padding-bottom: 5px;
+}
+
+a#req-btn {
+    background-color: #DBEEF3;
 }
 
 div.block {
     width: 38%;
-    min-height: 150px;
+    min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 0 5px 0 5px;
+    padding: 0px 15px 10px 30px;
+}
+
+div.block p{
+    font-size: 0.9em;
 }
 
 div.form_block {
@@ -21,14 +34,27 @@ div.form_block {
     min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 10px 5px 0 0;
+    padding: 0px 15px 10px 30px;
+}
+
+.block h3 {
+    margin-top: 0;
+}
+
+.block h4 {
+    margin-top: 0;
 }
 
 div.buttons_block {
     width: 38%;
     vertical-align: bottom;
     display: block;
-    margin: 10px 10px 0 0px;
+    margin: 0 10px 0 0;
+    padding-left: 30px;
+}
+
+#name-block {
+    font-size: large;
 }
 
 #nodata {
@@ -54,8 +80,27 @@ div.buttons_block {
 }
 
 .container {
-    padding: 0;
-    margin: 0 0 10px 0;
+    background: -webkit-linear-gradient(top, rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%);
+    border-radius: 10px;
+    padding: 0 10px 0 20px;
+    height: 100%;
+}
+
+#main-content {
+    align-items: center;
+    margin: 2% 0 4% 0;
+    padding: 0 0 0 60px;
+}
+
+#edit-main-content {
+    margin: 2% 0 1% 0;
+
+}
+
+#navbar {
+    width: 99%;
+    border-bottom: 1px solid #3498DB;
+    margin: 0;
 }
 
 .field {
@@ -101,10 +146,21 @@ input{
 
 img#preview {
     width: 100%;
+    max-width: 400px;
+    max-height: 300px;
 }
 
 #ajaxwrapper {
     display: inline;
     color:  green;
     margin-left: 10px;
+}
+
+#reqTable {
+    background: -webkit-linear-gradient(top, rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%);;
+    font-size: 0.80em;
+}
+
+#req-btn {
+    margin-left: 23px;
 }
