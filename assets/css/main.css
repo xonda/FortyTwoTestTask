@@ -4,17 +4,13 @@ body {
 }
 
 hr {
-    margin: 10px 0 10px 23px;
+    margin: 10px 0 10px 27px;
     height: 2px;
-    width: 96.5%;
+    width: 95.6%;
 }
 
 #navbar h1 {
     padding-bottom: 5px;
-}
-
-a#req-btn {
-    background-color: #DBEEF3;
 }
 
 div.block {
@@ -162,5 +158,6 @@ img#preview {
 }
 
 #req-btn {
-    margin-left: 23px;
+    background-color: #DBEEF3;
+    margin-left: 30px;
 }

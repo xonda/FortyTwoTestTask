@@ -4,7 +4,7 @@ from django.core import urlresolvers
 register = template.Library()
 
 
-class EditInAdminNode(template.Node):
+class EditLinkNode(template.Node):
     def __init__(self, obj):
         self.obj = template.Variable(obj)
 
@@ -14,10 +14,10 @@ class EditInAdminNode(template.Node):
 
 
 @register.tag()
-def edit_in_admin(render, token):
+def edit_link(render, token):
     try:
         tag_name, obj = token.split_contents()
     except ValueError:
         raise template.TemplateSyntaxError("%r tag requires a single argument"
                                            % token.contents.split()[0])
-    return EditInAdminNode(obj)
+    return EditLinkNode(obj)
