@@ -1,5 +1,7 @@
-from django.db import models
 from PIL import Image
+from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save, post_delete
 
 
 class Info(models.Model):
@@ -47,3 +49,34 @@ class WebRequest(models.Model):
 
     def __unicode__(self):
         return self.host
+
+
+class DatabaseLog(models.Model):
+    model = models.CharField(max_length=20)
+    action = models.CharField(max_length=20)
+    date = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.model
+
+
+EXCLUDE_SIGNALS = ['WebRequest', 'DatabaseLog', 'LogEntry']
+
+
+@receiver(post_save, dispatch_uid='RanDomDom')
+def object_update(sender, **kwargs):
+    obj_model = kwargs.get('instance').__class__.__name__
+    if obj_model in EXCLUDE_SIGNALS:
+        return
+    if not kwargs.get('created'):
+        DatabaseLog.objects.create(model=obj_model, action='edit')
+    else:
+        DatabaseLog.objects.create(model=obj_model, action='create')
+
+
+@receiver(post_delete, dispatch_uid='DooWop')
+def object_post_delete(sender, **kwargs):
+    obj_model = kwargs.get('instance').__class__.__name__
+    if obj_model in EXCLUDE_SIGNALS:
+        return
+    DatabaseLog.objects.create(model=obj_model, action='delete')

@@ -8,7 +8,7 @@ from django.core.urlresolvers import reverse
 from django.core.management import call_command
 from django.test import TestCase
 from django.test import Client
-from .models import Info, WebRequest
+from .models import Info, WebRequest, DatabaseLog
 
 
 client = Client()
@@ -200,3 +200,41 @@ class CusotmCommandsTest(TestCase):
             self.assertIn('error: User - 1 records', file_content)
             self.assertIn('error: Info - 3 records', file_content)
 
+
+class SignalProcessorTest(TestCase):
+    def test_delete_object_signal(self):
+        Info.objects.all()[0].delete()
+        record = DatabaseLog.objects.latest('date')
+        self.assertEqual('Info', record.model)
+        self.assertEqual('delete', record.action)
+
+    def test_edit_object_signal(self):
+        obj = Info.objects.all()[0]
+        obj.name = 'Teddy'
+        obj.save()
+        record = DatabaseLog.objects.latest('date')
+        self.assertEqual('Info', record.model)
+        self.assertEqual('edit', record.action)
+
+    def test_create_object_signal(self):
+        obj = Info(name='Tom', surname='Waits', dob='1986-01-22',
+                   bio='BlahBlah', email='tw@mail.com',
+                   jabber='tomw', skype='tomw', other='foo')
+        obj.save()
+        record = DatabaseLog.objects.latest('date')
+        self.assertEqual('Info', record.model)
+        self.assertEqual('create', record.action)
+
+    def test_edit_signal_not_doubled(self):
+        DatabaseLog.objects.all().delete()
+        obj = Info.objects.all()[0]
+        obj.name = 'Teddy'
+        obj.save()
+        self.assertNotEqual(2, DatabaseLog.objects.all().count())
+
+    def test_delete_signal_not_doubled(self):
+        DatabaseLog.objects.all().delete()
+        obj = Info.objects.all()[0]
+        obj.name = 'Teddy'
+        obj.save()
+        self.assertNotEqual(2, DatabaseLog.objects.all().count())
