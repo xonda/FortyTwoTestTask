@@ -26,9 +26,9 @@ class HomePageTests(TestCase):
     def setUp(self):
         self.driver = webdriver.Chrome()
 
-    def test_edit_in_admi_tag(self):
+    def test_edit_link_tag(self):
         """
-        Test if edit_in_admi tag drives to pbject admin page
+        Test if edit_link tag drives to poject admin page
         """
         self.driver.get("http://127.0.0.1:8000/login/")
         elem = self.driver.find_element_by_name("username")
@@ -43,7 +43,8 @@ class HomePageTests(TestCase):
         admin_body = self.driver.find_element_by_tag_name("body").text
         self.assertIn('Viktor', admin_body)
         self.assertIn('testerotuco@mail.ru', admin_body)
-        self.assertIn('testerotuco@mail.ru', admin_body)
+        jabber = self.driver.find_element_by_id('id_jabber')
+        self.assertIn('xonda', jabber.get_attribute('value'))
 
     def tearDown(self):
         self.driver.close()

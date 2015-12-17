@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 
-from django.test import TestCase
+import os.path
+import subprocess
+from datetime import date
+from StringIO import StringIO
 from django.core.urlresolvers import reverse
+from django.core.management import call_command
+from django.test import TestCase
 from django.test import Client
 from .models import Info, WebRequest
+
 
 client = Client()
 
@@ -110,7 +116,7 @@ class RequestsMiddlewareTest(TestCase):
 
 
 class EditInfoPageTests(TestCase):
-    fixtures = ['username.json']
+    fixtures = ['superuser.json']
 
     def test_edit_page_available(self):
         """
@@ -168,3 +174,29 @@ class EditInfoPageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(record.name, response.content)
         self.assertNotIn('No records in database', response.content)
+
+
+class CusotmCommandsTest(TestCase):
+    fixtures = ['superuser.json']
+    today = date.today().strftime('%d-%m-%Y')
+    filename = today + '.dat'
+    out = StringIO()
+    out_err = StringIO()
+    call_command('list_models', stdout=out, stderr=out_err)
+
+    def test_list_models_command(self):
+        self.assertIn('Info - 3 records', self.out.getvalue())
+        self.assertIn('User - 1 records', self.out.getvalue())
+        self.assertIn('error: Info - 3 records', self.out_err.getvalue())
+        self.assertIn('error: User - 1 records', self.out_err.getvalue())
+
+    def test_list_model_save_file(self):
+        subprocess.call('apps/hello/list-models.sh')
+        self.assertTrue(os.path.isfile('apps/hello/' + self.filename))
+
+    def test_list_model_file_contents(self):
+        with open('apps/hello/' + self.filename, 'rb') as f:
+            file_content = f.read()
+            self.assertIn('error: User - 1 records', file_content)
+            self.assertIn('error: Info - 3 records', file_content)
+

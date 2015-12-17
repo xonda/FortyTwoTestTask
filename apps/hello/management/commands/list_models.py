@@ -9,4 +9,3 @@ class Command(BaseCommand):
             output = '{0} - {1} records'.format(model.__name__, model.objects.all().count())
             self.stdout.write(output)
             self.stderr.write('error: ' + output)
-
