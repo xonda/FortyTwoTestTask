@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from selenium import webdriver
 
@@ -8,7 +9,7 @@ class RequestsPageTests(TestCase):
         Test content added with ajax
         """
         driver = webdriver.Chrome()
-        driver.get("http://127.0.0.1:8000/requests")
+        driver.get('http://127.0.0.1:8000' + reverse('requests'))
         self.assertIn('Requests', driver.title)
         tbody = driver.find_element_by_tag_name("tbody")
         self.assertIn(' /requests ', tbody.text)

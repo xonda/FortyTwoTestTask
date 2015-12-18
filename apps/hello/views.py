@@ -9,11 +9,7 @@ from .forms import InfoForm
 
 
 def home(request):
-    try:
-        info = Info.objects.all()[0]
-    except:
-        info = "Unfortunately there are no records in database"
-
+    info = Info.objects.first() or None
     context = {'info': info}
     return render(request, 'home.html', context)
 
@@ -23,20 +19,21 @@ def requests(request):
 
 
 def upd_requests(request):
-    if request.is_ajax():
-        last_10_reqs = WebRequest.objects.all().order_by('-id')[:10]
-        if last_10_reqs:
-            data = serializers.serialize("json", last_10_reqs)
-            return HttpResponse(data, content_type='application/json')
-        else:
-            return HttpResponse('No records in database')
-    return HttpResponse('Not ajax request')
+    if not request.is_ajax():
+        return HttpResponse('Not ajax request')
+
+    last_10_reqs = WebRequest.objects.all().order_by('-id')[:10]
+    if last_10_reqs:
+        data = serializers.serialize("json", last_10_reqs)
+        return HttpResponse(data, content_type='application/json')
+
+    return HttpResponse('No records in database')
 
 
 @login_required()
 def edit_info(request):
     try:
-        info = Info.objects.all()[0]
+        info = Info.objects.first()
         previous_photo = info.photo.path
     except:
         return HttpResponse('No records in database')
