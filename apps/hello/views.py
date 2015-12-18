@@ -4,18 +4,8 @@ from django.core import serializers
 from .models import Info, WebRequest
 
 
-# def home(request):
-#     try:
-#         info = Info.objects.all()[0]
-#     except:
-#         info = "Unfortunately there are no records in database"
-#
-#     context = {'info': info}
-#     return render(request, 'home.html', context)
-
 def home(request):
     info = Info.objects.first() or None
-
     context = {'info': info}
     return render(request, 'home.html', context)
 
