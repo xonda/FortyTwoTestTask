@@ -1,3 +1,4 @@
+from django.core.urlresolvers import reverse
 from django.test import TestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +12,7 @@ class RequestsPageTests(TestCase):
         """
         Test content added with ajax
         """
-        self.driver.get("http://127.0.0.1:8000/requests")
+        self.driver.get('http://127.0.0.1:8000' + reverse('requests'))
         self.assertIn('Requests', self.driver.title)
         tbody = self.driver.find_element_by_tag_name("tbody")
         self.assertIn(' /requests ', tbody.text)
@@ -30,7 +31,7 @@ class HomePageTests(TestCase):
         """
         Test if edit_link tag drives to poject admin page
         """
-        self.driver.get("http://127.0.0.1:8000/login/")
+        self.driver.get('http://127.0.0.1:8000' + reverse('login'))
         elem = self.driver.find_element_by_name("username")
         elem.send_keys("admin")
         elem = self.driver.find_element_by_name("password")
