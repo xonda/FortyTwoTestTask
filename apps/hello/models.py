@@ -10,6 +10,7 @@ class Info(models.Model):
     jabber = models.CharField(max_length=20, blank=True)
     skype = models.CharField(max_length=20, blank=True)
     other = models.TextField(max_length=200, blank=True)
+    photo = models.ImageField(upload_to='info', default='default_image.jpg')
 
     def __unicode__(self):
         return self.name
