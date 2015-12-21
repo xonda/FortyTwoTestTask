@@ -9,7 +9,7 @@ from .forms import InfoForm
 
 
 def home(request):
-    info = Info.objects.first() or None
+    info = Info.objects.first()
     context = {'info': info}
     return render(request, 'home.html', context)
 
