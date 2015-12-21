@@ -32,9 +32,8 @@ class MainPageTest(TestCase):
         """
         Info.objects.all().delete()
         response = client.get(reverse('home'))
-        self.assertIn('<div class="block">', response.content)
         self.assertIn('id="nodata"', response.content)
-        self.assertIn('id="nodata"', response.content)
+
 
     def test_unicode(self):
         """

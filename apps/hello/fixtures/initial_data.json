@@ -40,5 +40,23 @@
         "jabber": "jabber@jabber.com", 
         "email": "jsmith@gmail.com"
     }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-12-15T21:18:53.791Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$nYZhwWTc6DyF$reuIMYxvJgq+raaFzUayUr1dy80l93jhJwmLo18BbWs=", 
+        "email": "yamabushi@ukr.net", 
+        "date_joined": "2015-11-17T10:54:25.101Z"
+    }
 }
 ]
