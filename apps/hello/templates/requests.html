@@ -14,6 +14,7 @@
 
 
 {% block content %}
+
         <table id="reqTable" class="table table-bordered hidden">
             <thead>
                 <tr>
@@ -35,5 +36,6 @@
 
             </tbody>
         </table>
-        <a href="{% url 'home' %}" class="btn" role="button">Back</a>
+        <hr>
+        <a href="{% url 'home' %}" class="btn" id="req-btn" role="button">Back</a>
 {% endblock content %}
