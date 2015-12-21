@@ -23,7 +23,7 @@ div.block {
     min-height: 150px;
     vertical-align: top;
     display: inline-block;
-    padding: 15px 15px 15px 30px;
+    padding: 15px 15px 0 30px;
 }
 
 div.form_block {
@@ -32,10 +32,6 @@ div.form_block {
     vertical-align: top;
     display: inline-block;
     padding: 10px 5px 0 0;
-}
-
-.block h3 {
-    margin-top: 0;
 }
 
 div.buttons_block {
@@ -51,6 +47,8 @@ div.buttons_block {
 
 #nodata {
     color: red;
+    padding-left: 25%;
+    margin: 15% 0 15% 0;
 }
 
 #photo {
@@ -76,16 +74,13 @@ div.buttons_block {
     border-radius: 10px;
     padding: 0 10px 0 20px;
     height: 100%;
+    min-height: 550px;
 }
 
 #main-content {
     align-items: center;
     margin: 2% 0 4% 0;
     padding: 0 0 0 60px;
-}
-
-#navbar {
-
 }
 
 .field {
@@ -137,9 +132,4 @@ img#preview {
     display: inline;
     color:  green;
     margin-left: 10px;
-}
-
-#reqTable {
-    background: -webkit-linear-gradient(top, rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%);;
-    font-size: 0.80em;
 }

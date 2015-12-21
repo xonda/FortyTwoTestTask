@@ -21,8 +21,9 @@
 
 
 
-            {% if not info.name %}<h3 id="nodata">Unfortunately there are no records in database</h3>{% endif %}
+            {% if not info %}<h3 id="nodata">Unfortunately there are no records in database</h3>
 
+            {% elif info %}
             <div id="main-content">
             <div class="block" id="name-block">
                 <p>{{ info.name }}</p>
@@ -47,6 +48,7 @@
                 <div class="info_text">{{ info.other|linebreaks }}</div>
             </div>
         </div>
+            {% endif %}
             </div>
         <hr size="2">
         <a href="{% url 'requests' %}" class="btn" role="button">requests</a>
