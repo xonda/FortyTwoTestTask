@@ -133,3 +133,13 @@ img#preview {
     color:  green;
     margin-left: 10px;
 }
+
+#reqTable {
+    background: -webkit-linear-gradient(top, rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%);;
+    font-size: 0.80em;
+}
+
+#req-btn {
+    background-color: #DBEEF3;
+    margin-left: 30px;
+}
