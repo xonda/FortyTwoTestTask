@@ -23,7 +23,7 @@
 
             {% if not info %}<h3 id="nodata">Unfortunately there are no records in database</h3>
 
-            {% elif info %}
+            {% else %}
             <div id="main-content">
             <div class="block" id="name-block">
                 <p>{{ info.name }}</p>
