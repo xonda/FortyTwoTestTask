@@ -65,37 +65,39 @@ class MainPageTest(TestCase):
 
 
 class RequestsPageTests(TestCase):
+    fixtures = ['webrequest.json']
+
     def test_page_is_available(self):
         """
-        Test if requests page is availlable
+        Test if requests page is available
         """
-        response = client.get('/requests')
+        response = client.get(reverse('requests'))
         self.assertEqual(response.status_code, 200)
 
     def test_upd_request_not_ajax(self):
         """
         Test update request with not ajax request
         """
-        response = client.get('/upd_requests')
+        response = client.get(reverse('upd_requests'))
         self.assertEqual(response.content, 'Not ajax request')
 
-    def test_upd_requests_ajax(self):
+    def test_upd_requests_ajax_and_not_empty(self):
         """
-        Test update requests with ajax request
+        Test update requests with ajax request, db not empty
         """
-        response = client.get('/upd_requests',
+        response = client.get(reverse('upd_requests'),
+                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('127.0.0.1:8000', response.content)
+        self.assertIn('hello.webrequest', response.content)
+
+    def test_upd_requests_ajax_and_empty(self):
+        """
+        Test update requests with ajax request, db empty
+        """
+        WebRequest.objects.all().delete()
+        response = client.get(reverse('upd_requests'),
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertIn('No records in database', response.content)
-
-    def test_requests_content(self):
-        """
-        Test content served by requests view
-        """
-        response = client.get('/requests')
-        self.assertIn('Host', response.content)
-        self.assertIn('User Agent', response.content)
-        self.assertIn('Ajax', response.content)
-        self.assertIn('Requests | Site Name', response.content)
 
 
 class RequestsMiddlewareTest(TestCase):

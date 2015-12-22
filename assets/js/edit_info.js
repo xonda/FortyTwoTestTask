@@ -74,7 +74,7 @@ $(document).ready(function(){
     }
 
     function submitSuccess(responseText, statusText, xhr, $form)  {
-        $(":input").attr('disabled', false)
+        $(":input").attr('disabled', false);
         $(".blink").remove();
     }
 

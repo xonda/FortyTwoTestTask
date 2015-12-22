@@ -5,29 +5,29 @@ from PIL import Image
 class Info(models.Model):
     name = models.CharField(max_length=20)
     surname = models.CharField(max_length=20)
-    dob = models.DateField(blank=True)
-    bio = models.TextField(max_length=200, blank=True)
-    email = models.EmailField(blank=True)
-    jabber = models.CharField(max_length=20, blank=True)
-    skype = models.CharField(max_length=20, blank=True)
-    other = models.TextField(max_length=200, blank=True)
+    dob = models.DateField()
+    bio = models.TextField(max_length=200)
+    email = models.EmailField()
+    jabber = models.CharField(max_length=20)
+    skype = models.CharField(max_length=20)
+    other = models.TextField(max_length=200)
     photo = models.ImageField(upload_to='info', default='None')
 
     def save(self):
         super(Info, self).save()
-        pw = self.photo.width
-        ph = self.photo.height
+        try:
+            pw = self.photo.width
+            ph = self.photo.height
 
-        mw = 200
-        mh = 200
-        if pw > mw or ph > mh:
-            try:
-                filename = str(self.photo.path)
-                image = Image.open(filename)
-                image.thumbnail((mw, mh), Image.ANTIALIAS)
-                image.save(filename)
-            except IOError:
-                print 'oops'
+            mw = 200
+            mh = 200
+            if pw > mw or ph > mh:
+                    filename = str(self.photo.path)
+                    image = Image.open(filename)
+                    image.thumbnail((mw, mh), Image.ANTIALIAS)
+                    image.save(filename)
+        except IOError:
+            return
 
     def __unicode__(self):
         return self.name
