@@ -11,7 +11,7 @@ class Info(models.Model):
     jabber = models.CharField(max_length=20, blank=True)
     skype = models.CharField(max_length=20, blank=True)
     other = models.TextField(max_length=200, blank=True)
-    photo = models.ImageField(upload_to='info', default='default_image.jpg')
+    photo = models.ImageField(upload_to='info', default='None')
 
     def save(self):
         super(Info, self).save()

@@ -49,7 +49,9 @@
                 </div>
 
                 <div class="block" id="photo">
-                    <img src='{{ info.photo.url }}' alt="Photo">
+                    <img src='{% if info.photo.url == '/uploads/None' %} {% static 'img/default_image.png' %}
+                              {% else %} {{ info.photo.url }}
+                              {% endif %}' alt="Photo">
                 </div>
 
                 <div class="block">

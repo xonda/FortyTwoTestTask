@@ -9,6 +9,8 @@ client = Client()
 
 
 class MainPageTest(TestCase):
+    fixtures = ['initial_data.json']
+
     def test_home_page_alive(self):
         """
         Test if home page returns 200 ok
@@ -109,7 +111,7 @@ class RequestsMiddlewareTest(TestCase):
 
 
 class EditInfoPageTests(TestCase):
-    fixtures = ['username.json']
+    fixtures = ['superuser.json']
 
     def test_edit_page_available(self):
         """

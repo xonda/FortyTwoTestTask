@@ -32,12 +32,11 @@ def upd_requests(request):
 
 @login_required()
 def edit_info(request):
-    try:
-        info = Info.objects.first()
-        previous_photo = info.photo.path
-    except:
+    info = Info.objects.first()
+    if not info:
         return HttpResponse('No records in database')
     form = InfoForm(request.POST or None, request.FILES or None, instance=info)
+    previous_photo = info.photo.path
     if form.is_valid():
         form.save()
         try:
