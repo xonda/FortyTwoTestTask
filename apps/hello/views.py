@@ -9,7 +9,7 @@ from .forms import InfoForm
 
 
 def home(request):
-    info = Info.objects.first() or None
+    info = Info.objects.first()
     context = {'info': info}
     return render(request, 'home.html', context)
 
@@ -32,12 +32,11 @@ def upd_requests(request):
 
 @login_required()
 def edit_info(request):
-    try:
-        info = Info.objects.all()[0]
-        previous_photo = info.photo.path
-    except:
+    info = Info.objects.first()
+    if not info:
         return HttpResponse('No records in database')
     form = InfoForm(request.POST or None, request.FILES or None, instance=info)
+    previous_photo = info.photo.path
     if form.is_valid():
         form.save()
         try:

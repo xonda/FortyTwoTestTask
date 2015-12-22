@@ -1,7 +1,5 @@
 from PIL import Image
 from django.db import models
-from django.dispatch import receiver
-from django.db.models.signals import post_save, post_delete
 
 
 class Info(models.Model):
@@ -13,23 +11,23 @@ class Info(models.Model):
     jabber = models.CharField(max_length=20, blank=True)
     skype = models.CharField(max_length=20, blank=True)
     other = models.TextField(max_length=200, blank=True)
-    photo = models.ImageField(upload_to='info', default='default_image.jpg')
+    photo = models.ImageField(upload_to='info', default='None')
 
     def save(self):
         super(Info, self).save()
-        pw = self.photo.width
-        ph = self.photo.height
+        try:
+            pw = self.photo.width
+            ph = self.photo.height
 
-        mw = 200
-        mh = 200
-        if pw > mw or ph > mh:
-            try:
+            mw = 200
+            mh = 200
+            if pw > mw or ph > mh:
                 filename = str(self.photo.path)
                 image = Image.open(filename)
                 image.thumbnail((mw, mh), Image.ANTIALIAS)
                 image.save(filename)
-            except IOError:
-                print 'oops'
+        except IOError:
+            return
 
     def __unicode__(self):
         return self.name
@@ -58,25 +56,3 @@ class DatabaseLog(models.Model):
 
     def __unicode__(self):
         return self.model
-
-
-EXCLUDE_SIGNALS = ['WebRequest', 'DatabaseLog', 'LogEntry']
-
-
-@receiver(post_save, dispatch_uid='RanDomDom')
-def object_update(sender, **kwargs):
-    obj_model = kwargs.get('instance').__class__.__name__
-    if obj_model in EXCLUDE_SIGNALS:
-        return
-    if not kwargs.get('created'):
-        DatabaseLog.objects.create(model=obj_model, action='edit')
-    else:
-        DatabaseLog.objects.create(model=obj_model, action='create')
-
-
-@receiver(post_delete, dispatch_uid='DooWop')
-def object_post_delete(sender, **kwargs):
-    obj_model = kwargs.get('instance').__class__.__name__
-    if obj_model in EXCLUDE_SIGNALS:
-        return
-    DatabaseLog.objects.create(model=obj_model, action='delete')

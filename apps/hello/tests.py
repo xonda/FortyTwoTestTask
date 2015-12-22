@@ -38,7 +38,6 @@ class MainPageTest(TestCase):
         """
         Info.objects.all().delete()
         response = client.get(reverse('home'))
-        self.assertIn('<div class="block">', response.content)
         self.assertIn('id="nodata"', response.content)
 
     def test_unicode(self):
@@ -183,6 +182,7 @@ class CusotmCommandsTest(TestCase):
     out = StringIO()
     out_err = StringIO()
     call_command('list_models', stdout=out, stderr=out_err)
+    subprocess.call('./list-models.sh')
 
     def test_list_models_command(self):
         self.assertIn('Info - 3 records', self.out.getvalue())
@@ -191,11 +191,10 @@ class CusotmCommandsTest(TestCase):
         self.assertIn('error: User - 1 records', self.out_err.getvalue())
 
     def test_list_model_save_file(self):
-        subprocess.call('apps/hello/list-models.sh')
-        self.assertTrue(os.path.isfile('apps/hello/' + self.filename))
+        self.assertTrue(os.path.isfile(self.filename))
 
     def test_list_model_file_contents(self):
-        with open('apps/hello/' + self.filename, 'rb') as f:
+        with open(self.filename, 'rb') as f:
             file_content = f.read()
             self.assertIn('error: User - 1 records', file_content)
             self.assertIn('error: Info - 3 records', file_content)
@@ -236,5 +235,6 @@ class SignalProcessorTest(TestCase):
         DatabaseLog.objects.all().delete()
         obj = Info.objects.all()[0]
         obj.name = 'Teddy'
+        obj.photo = 'img.png'
         obj.save()
         self.assertNotEqual(2, DatabaseLog.objects.all().count())

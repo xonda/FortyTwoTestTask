@@ -7,7 +7,6 @@
         "surname": "Lykov", 
         "name": "Viktor", 
         "dob": "1986-01-22", 
-        "photo": "info/IMG_1364.png", 
         "other": "ICQ: 228339308\r\nEmail: testerotuco@mail.ru\r\nYahoo: bitoc_coolpepper", 
         "skype": "testerotuco", 
         "jabber": "xonda@khavr.com", 
@@ -22,7 +21,6 @@
         "surname": "\u0418\u0432\u0430\u043d\u043e\u0432", 
         "name": "\u0418\u0432\u0430\u043d", 
         "dob": "2015-11-18", 
-        "photo": "default_image.jpg", 
         "other": "\u0421\u0442\u0440\u043e\u043a\u0430\r\n\u0421\u0442\u0440\u043e\u043a\u0430\r\n\u0421\u0442\u0440\u043e\u043a\u0430", 
         "skype": "\u0441\u043a\u0430\u0439\u043f", 
         "jabber": "\u0434\u0436\u0430\u0431\u0431\u0431\u0435\u0440", 
@@ -37,11 +35,28 @@
         "surname": "Smith", 
         "name": "John", 
         "dob": "2015-11-18", 
-        "photo": "default_image.jpg", 
         "other": "Line 1\r\nLine 2\r\nLine 3", 
         "skype": "jsmith", 
         "jabber": "jabber@jabber.com", 
         "email": "jsmith@gmail.com"
+    }
+},
+{
+    "pk": 1, 
+    "model": "auth.user", 
+    "fields": {
+        "username": "admin", 
+        "first_name": "", 
+        "last_name": "", 
+        "is_active": true, 
+        "is_superuser": true, 
+        "is_staff": true, 
+        "last_login": "2015-12-15T21:18:53.791Z", 
+        "groups": [], 
+        "user_permissions": [], 
+        "password": "pbkdf2_sha256$12000$nYZhwWTc6DyF$reuIMYxvJgq+raaFzUayUr1dy80l93jhJwmLo18BbWs=", 
+        "email": "yamabushi@ukr.net", 
+        "date_joined": "2015-11-17T10:54:25.101Z"
     }
 }
 ]
