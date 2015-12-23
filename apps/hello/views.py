@@ -33,37 +33,33 @@ def upd_requests(request):
 
 @login_required()
 def edit_info(request):
-    try:
-        info = Info.objects.first()
-        if not info:
-            return HttpResponse('No records in database')
-        form = InfoForm(request.POST or None, request.FILES or None, instance=info)
-        previous_photo = info.photo.path
+    info = Info.objects.first()
+    if not info:
+        return HttpResponse('No records in database')
+    form = InfoForm(request.POST or None, request.FILES or None, instance=info)
+    previous_photo = info.photo.path
 
-        if form.is_valid():
-            form.save()
-            try:
-                if previous_photo != info.photo.path:
-                    os.remove(previous_photo)
-            except Exception, e:
-                print str(e)
-            if request.is_ajax():
-                time.sleep(3)
-                return HttpResponse('Changes have been saved')
-            else:
-                return redirect('home')
+    if not form.is_valid() and not form.errors:
+        context = {
+            'form': form,
+        }
+        return render(request, 'edit_info.html', context)
 
-        elif form.errors:
-            errors_dict = {}
-            for error in form.errors:
-                e = form.errors[error]
-                errors_dict[error] = unicode(e)
-            return HttpResponseBadRequest(json.dumps(errors_dict))
-
+    if form.is_valid():
+        form.save()
+        try:
+            if previous_photo != info.photo.path:
+                os.remove(previous_photo)
+        except Exception, e:
+            print str(e)
+        if request.is_ajax():
+            time.sleep(3)
+            return HttpResponse('Changes have been saved')
         else:
-            context = {
-                'form': form,
-            }
-            return render(request, 'edit_info.html', context)
-    except Exception, e:
-                print str(e)
+            return redirect('home')
+
+    errors_dict = {}
+    for error in form.errors:
+        e = form.errors[error]
+        errors_dict[error] = unicode(e)
+    return HttpResponseBadRequest(json.dumps(errors_dict))
