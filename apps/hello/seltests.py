@@ -10,7 +10,7 @@ class RequestsPageTests(TestCase):
 
     def test_requests_page_content(self):
         """
-        Test content added with ajax
+        Test requests page contents
         """
         self.driver.get('http://127.0.0.1:8000' + reverse('requests'))
         self.assertIn('Requests', self.driver.title)

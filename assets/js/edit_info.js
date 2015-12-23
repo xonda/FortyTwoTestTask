@@ -60,7 +60,18 @@ $(document).ready(function(){
     var edit_info_options = {
     target:        '#ajaxwrapper',   // target element(s) to be updated with server response
     beforeSubmit:  beforeSubmit,  // pre-submit callback
-    success:       submitSuccess  // post-submit callback
+    success:       submitSuccess,  // post-submit callback
+    error:         function(resp) {
+                        var errors = JSON.parse(resp.responseText);
+                        for (error in errors) {
+                            var id = '#id_' + error;
+                            $("<span class='text-danger'>"+errors[error]+"</span>").insertBefore(id);
+                            if (id == '#id_dob'){
+                                $("<span class='text-danger'>"+errors[error]+"</span>").insertBefore('#datepicker');
+                            }
+                        submitSuccess();
+                        }
+                    }
     };
 
     $('#edit_form').ajaxForm(edit_info_options);
@@ -70,11 +81,12 @@ $(document).ready(function(){
           $(":input").attr('disabled', true);
           $(".buttons_block").append('<span class="blink">Saving Info, please wait... </span>');
           setInterval(blinker, 500);
+          $('.text-danger').remove();
     return true;
     }
 
     function submitSuccess(responseText, statusText, xhr, $form)  {
-        $(":input").attr('disabled', false)
+        $(":input").attr('disabled', false);
         $(".blink").remove();
     }
 

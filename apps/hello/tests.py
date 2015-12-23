@@ -69,37 +69,39 @@ class MainPageTest(TestCase):
 
 
 class RequestsPageTests(TestCase):
+    fixtures = ['webrequest.json']
+
     def test_page_is_available(self):
         """
-        Test if requests page is availlable
+        Test if requests page is available
         """
-        response = client.get('/requests')
+        response = client.get(reverse('requests'))
         self.assertEqual(response.status_code, 200)
 
     def test_upd_request_not_ajax(self):
         """
         Test update request with not ajax request
         """
-        response = client.get('/upd_requests')
+        response = client.get(reverse('upd_requests'))
         self.assertEqual(response.content, 'Not ajax request')
 
-    def test_upd_requests_ajax(self):
+    def test_upd_requests_ajax_and_not_empty(self):
         """
-        Test update requests with ajax request
+        Test update requests with ajax request, db not empty
         """
         response = client.get(reverse('upd_requests'),
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertEqual('No records in database', response.content)
+        self.assertIn('127.0.0.1:8000', response.content)
+        self.assertIn('hello.webrequest', response.content)
 
-    def test_requests_content(self):
+    def test_upd_requests_ajax_and_empty(self):
         """
-        Test content served by requests view
+        Test update requests with ajax request, db empty
         """
-        response = client.get('/requests')
-        self.assertIn('Host', response.content)
-        self.assertIn('User Agent', response.content)
-        self.assertIn('Ajax', response.content)
-        self.assertIn('Requests | Site Name', response.content)
+        WebRequest.objects.all().delete()
+        response = client.get(reverse('upd_requests'),
+                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('No records in database', response.content)
 
 
 class RequestsMiddlewareTest(TestCase):
@@ -107,7 +109,7 @@ class RequestsMiddlewareTest(TestCase):
         """
         Test if middleware saves requests in database
         """
-        client.get('/')
+        client.get(reverse('home'))
         query = WebRequest.objects.get(pk=1)
         self.assertTrue(query)
         self.assertEqual(query.path, '/')
@@ -173,6 +175,42 @@ class EditInfoPageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(record.name, response.content)
         self.assertNotIn('No records in database', response.content)
+
+    def test_post_is_valid(self):
+        """
+        Test when POST is valid
+        """
+        client.login(username='admin', password='admin')
+        response = client.post(reverse('edit_info'),
+               {"bio": "Several words",
+                "surname": "Lykov", "name": "Viktor",
+                "dob": "1986-01-22", "photo": "",
+                "other": "ICQ: 228339308",
+                "skype": "testerotuco",
+                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                "jabber": "xonda@khavr.com",
+                "email": "yamabushi@ukr.net"},
+               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual('Changes have been saved', response.content)
+
+    def test_post_is_invalid(self):
+        """
+        Test when POST is Invalid
+        """
+        client.login(username='admin', password='admin')
+        response = client.post(reverse('edit_info'),
+               {"bio": "",
+                "surname": "Lykov", "name": "Viktor",
+                "dob": "1986", "photo": "",
+                "other": "ICQ: 228339308",
+                "skype": "testerotuco",
+                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                "jabber": "xonda@khavr.com",
+                "email": "yamabushiukr.net"},
+               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('This field is required', response.content)
+        self.assertIn('Enter a valid email address', response.content)
+        self.assertIn('invalid date format', response.content)
 
 
 class CusotmCommandsTest(TestCase):
