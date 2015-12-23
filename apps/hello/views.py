@@ -40,6 +40,12 @@ def edit_info(request):
     form = InfoForm(request.POST or None, request.FILES or None, instance=info)
     previous_photo = info.photo.path
 
+    if not form.is_valid() and not form.errors:
+        context = {
+            'form': form,
+        }
+        return render(request, 'edit_info.html', context)
+
     if form.is_valid():
         form.save()
         try:
@@ -53,15 +59,8 @@ def edit_info(request):
         else:
             return redirect('home')
 
-    elif form.errors:
-        errors_dict = {}
-        for error in form.errors:
-            e = form.errors[error]
-            errors_dict[error] = unicode(e)
-        return HttpResponseBadRequest(json.dumps(errors_dict))
-
-    else:
-        context = {
-            'form': form,
-        }
-        return render(request, 'edit_info.html', context)
+    errors_dict = {}
+    for error in form.errors:
+        e = form.errors[error]
+        errors_dict[error] = unicode(e)
+    return HttpResponseBadRequest(json.dumps(errors_dict))
