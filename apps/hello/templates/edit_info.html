@@ -32,17 +32,14 @@
                 <div class="form_block">
                     <div class="main">
                         <div class="field">
-                            <span class="text-danger">{{ form.name.errors.as_text }}</span>
                             {{ form.name.label_tag }}
                             {{ form.name }}
                         </div>
                         <div class="field">
-                            <span class="text-danger">{{ form.surname.errors.as_text }}</span>
                             {{ form.surname.label_tag }}
                             {{ form.surname }}
                         </div>
                         <div class="field">
-                            <span class="text-danger">{{ form.dob.errors.as_text }}</span>
                             {{ form.dob.label_tag }}
                             {{ form.dob }}
                         </div>
@@ -52,17 +49,14 @@
                 <div class="form_block">
                     <div class="main">
                         <div class="field">
-                            <span class="text-danger">{{ form.email.errors.as_text }}</span>
                             {{ form.email.label_tag }}
                             {{ form.email }}
                         </div>
                         <div class="field">
-                            <span class="text-danger">{{ form.jabber.errors.as_text }}</span>
                             {{ form.jabber.label_tag }}
                             {{ form.jabber }}
                         </div>
                         <div class="field">
-                            <span class="text-danger">{{ form.skype.errors.as_text }}</span>
                             {{ form.skype.label_tag }}
                             {{ form.skype }}
                         </div>
@@ -71,18 +65,18 @@
 
                 <div class="form_block" id="photo">
                     <div class="main">
-                        <div class="field">{{ form.photo.label_tag }}{{ form.photo }}</div>
+                        <div class="field">{{ form.photo.label_tag }}{{ form.photo  }}</div>
                     </div>
                     <img id="preview" src="" alt="Photo preview" height="300" width="400">
                 </div>
 
                 <div class="form_block">
-                    <b><p>Other contacts:</b> <span class="text-danger">{{ form.email.errors.as_text }}</span></p>
+                    <b><p>Other contacts:</b></p>
                     {{ form.other }}
                 </div>
 
                 <div class="form_block">
-                    <b><p>Biography:</b> <span class="text-danger">{{ form.email.errors.as_text }}</span></p>
+                    <b><p>Biography:</b></p>
                     {{ form.bio }}
                 </div>
 

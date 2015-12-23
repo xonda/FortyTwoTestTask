@@ -171,3 +171,39 @@ class EditInfoPageTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertIn(record.name, response.content)
         self.assertNotIn('No records in database', response.content)
+
+    def test_post_is_valid(self):
+        """
+        Test when POST is valid
+        """
+        client.login(username='admin', password='admin')
+        response = client.post(reverse('edit_info'),
+               {"bio": "Several words",
+                "surname": "Lykov", "name": "Viktor",
+                "dob": "1986-01-22", "photo": "",
+                "other": "ICQ: 228339308",
+                "skype": "testerotuco",
+                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                "jabber": "xonda@khavr.com",
+                "email": "yamabushi@ukr.net"},
+               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual('Changes have been saved', response.content)
+
+    def test_post_is_invalid(self):
+        """
+        Test when POST is Invalid
+        """
+        client.login(username='admin', password='admin')
+        response = client.post(reverse('edit_info'),
+               {"bio": "",
+                "surname": "Lykov", "name": "Viktor",
+                "dob": "1986", "photo": "",
+                "other": "ICQ: 228339308",
+                "skype": "testerotuco",
+                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                "jabber": "xonda@khavr.com",
+                "email": "yamabushiukr.net"},
+               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertIn('This field is required', response.content)
+        self.assertIn('Enter a valid email address', response.content)
+        self.assertIn('invalid date format', response.content)
