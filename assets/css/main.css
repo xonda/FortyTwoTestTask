@@ -165,9 +165,17 @@ img#preview {
     margin-left: 30px;
 }
 
+#req-filter {
+    float: right;
+    margin: 0 10px 10px 0;
+    color: white;
+    cursor: pointer;
+}
+
 span.text-danger ul {
     font-size: x-small;
     float: left;
     padding-left: 10px;
     margin-right: 5px;
 }
+

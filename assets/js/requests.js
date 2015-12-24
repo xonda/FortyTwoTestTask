@@ -31,6 +31,7 @@ $(document).ready(function(){
             content += '<td>' + data[i].fields.is_secure + '</td>';
             content += '<td>' + data[i].fields.is_ajax + '</td>';
             content += '<td>' + data[i].fields.user + '</td>';
+            content += '<td> 1 </td>';
             content += '</tr>';
         }
         table_body.html(content);
