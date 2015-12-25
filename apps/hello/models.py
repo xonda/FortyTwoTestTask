@@ -44,7 +44,7 @@ class WebRequest(models.Model):
     is_secure = models.BooleanField()
     is_ajax = models.BooleanField()
     user = models.CharField(max_length=20, blank=True)
-    priority = models.CharField(max_length=15)
+    priority = models.CharField(max_length=15, null=True, blank=True)
 
     def __unicode__(self):
         return self.host

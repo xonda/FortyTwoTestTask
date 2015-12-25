@@ -3,6 +3,7 @@ $(document).ready(function(){
     var title = $('title').text();
     var last_number = 0;
     var new_count = 0;
+    var priority_flag = false;
 
     function upd_requests() {
         $.ajax({
@@ -19,6 +20,7 @@ $(document).ready(function(){
         var content = '';
         var table_body = $('tbody');
         for (var i=0;i < data.length;i++) {
+            if (priority_flag && data[i].fields.priority != '1') { continue; }
             content += '<tr>';
             content += '<td>' + data[i].pk + '</td>';
             content += '<td>' + data[i].fields.time + '</td>';
@@ -31,7 +33,7 @@ $(document).ready(function(){
             content += '<td>' + data[i].fields.is_secure + '</td>';
             content += '<td>' + data[i].fields.is_ajax + '</td>';
             content += '<td>' + data[i].fields.user + '</td>';
-            content += '<td> 1 </td>';
+            content += '<td>' + data[i].fields.priority + '</td>';
             content += '</tr>';
         }
         table_body.html(content);
@@ -50,6 +52,13 @@ $(document).ready(function(){
     $(window).focus(function(){
         $('title').text(title);
         new_count = 0
+    });
+
+
+    $('#req-filter').click(function(){
+        priority_flag = !priority_flag;
+        $('#req-filter').toggleClass('glow', 'addOrRemove');
+        upd_requests();
     });
 
     upd_requests();

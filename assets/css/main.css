@@ -179,3 +179,8 @@ span.text-danger ul {
     margin-right: 5px;
 }
 
+.glow {
+	color: #fff;
+	text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+}
+

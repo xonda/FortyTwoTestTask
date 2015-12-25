@@ -277,12 +277,13 @@ class SignalProcessorTest(TestCase):
         obj.save()
         self.assertNotEqual(2, DatabaseLog.objects.all().count())
 
+
 class PriorityMarkTests(TestCase):
     def test_priority_middlware_1(self):
         """
         Test if middleware sets priority mark 1
         """
-        client.get(reverse('requests'))
+        client.post(reverse('edit_info'))
         query = WebRequest.objects.first()
         self.assertEqual(query.priority, '1')
 
@@ -290,24 +291,6 @@ class PriorityMarkTests(TestCase):
         """
         Test if middleware sets priority mark 0
         """
-        client.get(reverse('admin'))
+        client.get(reverse('home'))
         query = WebRequest.objects.first()
         self.assertEqual(query.priority, '0')
-
-    def test_priority_field_in_response(self):
-        """
-        Test if upd_requests returns p. field
-        """
-        client.get(reverse('requests'))
-        response = client.get(reverse('upd_requests'),
-                              HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertEqual('1', response.priority)
-
-    def test_priority_field_on_page(self):
-        """
-        Test if upd_requests are shown on page
-        """
-        client.get(reverse('admin'))
-        response = client.get(reverse('requests'))
-        self.assertEqual('0', response.content)
-
