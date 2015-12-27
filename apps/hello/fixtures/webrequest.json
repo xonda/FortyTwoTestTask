@@ -5,14 +5,15 @@
     "fields": {
         "is_ajax": false, 
         "get": null, 
+        "priority": "0", 
         "host": "127.0.0.1:8000", 
         "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
         "is_secure": false, 
-        "time": "2015-12-22T13:50:52.328Z", 
-        "path": "/requests", 
+        "time": "2015-12-27T21:04:08.550Z", 
+        "path": "/", 
         "post": "{}", 
         "method": "GET", 
-        "user": "AnonymousUser"
+        "user": "admin"
     }
 },
 {
@@ -21,14 +22,15 @@
     "fields": {
         "is_ajax": false, 
         "get": null, 
+        "priority": "0", 
         "host": "127.0.0.1:8000", 
         "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
         "is_secure": false, 
-        "time": "2015-12-22T13:50:53.118Z", 
-        "path": "/favicon.ico", 
+        "time": "2015-12-27T21:04:12.616Z", 
+        "path": "/admin/hello/info/1/", 
         "post": "{}", 
         "method": "GET", 
-        "user": "AnonymousUser"
+        "user": "admin"
     }
 },
 {
@@ -37,14 +39,15 @@
     "fields": {
         "is_ajax": false, 
         "get": null, 
+        "priority": "0", 
         "host": "127.0.0.1:8000", 
         "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
         "is_secure": false, 
-        "time": "2015-12-22T13:51:00.472Z", 
-        "path": "/requests", 
+        "time": "2015-12-27T21:04:13.103Z", 
+        "path": "/admin/jsi18n/", 
         "post": "{}", 
         "method": "GET", 
-        "user": "AnonymousUser"
+        "user": "admin"
     }
 },
 {
@@ -53,14 +56,168 @@
     "fields": {
         "is_ajax": false, 
         "get": null, 
+        "priority": "0", 
         "host": "127.0.0.1:8000", 
         "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
         "is_secure": false, 
-        "time": "2015-12-22T13:51:01.067Z", 
-        "path": "/favicon.ico", 
+        "time": "2015-12-27T21:04:17.240Z", 
+        "path": "/edit", 
         "post": "{}", 
         "method": "GET", 
-        "user": "AnonymousUser"
+        "user": "admin"
+    }
+},
+{
+    "pk": 5, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": true, 
+        "get": null, 
+        "priority": "1", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:19.319Z", 
+        "path": "/edit", 
+        "post": "{\"bio\": \"Several words about myself. \\r\\nI've been working as online projects coordinator the last 7 years.\\r\\nSome time ago I started to learn python using MOOCs, books and documentation to automate routine processes. \\r\\nNow I intend to fully dive into development.\", \"surname\": \"Lykov\", \"name\": \"Viktor\", \"dob\": \"1986-01-22\", \"photo\": \"\", \"other\": \"ICQ: 228339308\\r\\nEmail: testerotuco@mail.ru\\r\\nYahoo: bitoc_coolpepper\", \"skype\": \"testerotuco\", \"csrfmiddlewaretoken\": \"tWo0zh2oBHIvTj5TtXOnfeL9Qed5ADz2\", \"jabber\": \"xonda@khavr.com\", \"email\": \"yamabushi@ukr.net\"}", 
+        "method": "POST", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 6, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": true, 
+        "get": null, 
+        "priority": "1", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:24.875Z", 
+        "path": "/edit", 
+        "post": "{\"bio\": \"Several words about myself. \\r\\nI've been working as online projects coordinator the last 7 years.\\r\\nSome time ago I started to learn python using MOOCs, books and documentation to automate routine processes. \\r\\nNow I intend to fully dive into development.\", \"surname\": \"Lykov\", \"name\": \"Viktor\", \"dob\": \"1986-01-22\", \"photo\": \"\", \"other\": \"ICQ: 228339308\\r\\nEmail: testerotuco@mail.ru\\r\\nYahoo: bitoc_coolpepper\", \"skype\": \"testerotuco\", \"csrfmiddlewaretoken\": \"tWo0zh2oBHIvTj5TtXOnfeL9Qed5ADz2\", \"jabber\": \"xonda@khavr.com\", \"email\": \"yamabushi@ukr.net\"}", 
+        "method": "POST", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 7, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": true, 
+        "get": null, 
+        "priority": "1", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:29.136Z", 
+        "path": "/edit", 
+        "post": "{\"bio\": \"Several words about myself. \\r\\nI've been working as online projects coordinator the last 7 years.\\r\\nSome time ago I started to learn python using MOOCs, books and documentation to automate routine processes. \\r\\nNow I intend to fully dive into development.\", \"surname\": \"Lykov\", \"name\": \"Viktor\", \"dob\": \"1986-01-22\", \"photo\": \"\", \"other\": \"ICQ: 228339308\\r\\nEmail: testerotuco@mail.ru\\r\\nYahoo: bitoc_coolpepper\", \"skype\": \"testerotuco\", \"csrfmiddlewaretoken\": \"tWo0zh2oBHIvTj5TtXOnfeL9Qed5ADz2\", \"jabber\": \"xonda@khavr.com\", \"email\": \"yamabushi@ukr.net\"}", 
+        "method": "POST", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 8, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": false, 
+        "get": null, 
+        "priority": "0", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:33.351Z", 
+        "path": "/", 
+        "post": "{}", 
+        "method": "GET", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 9, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": false, 
+        "get": null, 
+        "priority": "0", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:34.785Z", 
+        "path": "/requests", 
+        "post": "{}", 
+        "method": "GET", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 10, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": false, 
+        "get": null, 
+        "priority": "0", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:42.532Z", 
+        "path": "/", 
+        "post": "{}", 
+        "method": "GET", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 11, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": false, 
+        "get": null, 
+        "priority": "0", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:54.986Z", 
+        "path": "/edit", 
+        "post": "{}", 
+        "method": "GET", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 12, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": true, 
+        "get": null, 
+        "priority": "1", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:04:56.321Z", 
+        "path": "/edit", 
+        "post": "{\"bio\": \"Several words about myself. \\r\\nI've been working as online projects coordinator the last 7 years.\\r\\nSome time ago I started to learn python using MOOCs, books and documentation to automate routine processes. \\r\\nNow I intend to fully dive into development.\", \"surname\": \"Lykov\", \"name\": \"Viktor\", \"dob\": \"1986-01-22\", \"photo\": \"\", \"other\": \"ICQ: 228339308\\r\\nEmail: testerotuco@mail.ru\\r\\nYahoo: bitoc_coolpepper\", \"skype\": \"testerotuco\", \"csrfmiddlewaretoken\": \"tWo0zh2oBHIvTj5TtXOnfeL9Qed5ADz2\", \"jabber\": \"xonda@khavr.com\", \"email\": \"yamabushi@ukr.net\"}", 
+        "method": "POST", 
+        "user": "admin"
+    }
+},
+{
+    "pk": 13, 
+    "model": "hello.webrequest", 
+    "fields": {
+        "is_ajax": false, 
+        "get": null, 
+        "priority": "0", 
+        "host": "127.0.0.1:8000", 
+        "user_agent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36", 
+        "is_secure": false, 
+        "time": "2015-12-27T21:05:00.264Z", 
+        "path": "/", 
+        "post": "{}", 
+        "method": "GET", 
+        "user": "admin"
     }
 }
 ]

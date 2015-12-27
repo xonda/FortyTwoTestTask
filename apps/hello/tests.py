@@ -90,8 +90,9 @@ class RequestsPageTests(TestCase):
         Test update requests with ajax request, db not empty
         """
         response = client.get(reverse('upd_requests'),
+                              {'sort_flag': '1'},
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
-        self.assertIn('127.0.0.1:8000', response.content)
+        self.assertIn('"priority": "1"', response.content)
         self.assertIn('hello.webrequest', response.content)
 
     def test_upd_requests_ajax_and_empty(self):
@@ -100,6 +101,7 @@ class RequestsPageTests(TestCase):
         """
         WebRequest.objects.all().delete()
         response = client.get(reverse('upd_requests'),
+                              {'sort_flag': '1'},
                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertIn('No records in database', response.content)
 
