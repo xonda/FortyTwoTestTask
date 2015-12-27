@@ -4,6 +4,9 @@ $(document).ready(function(){
     var last_number = 0;
     var new_count = 0;
     var priority_flag = false;
+    var sort_flag = 0;
+    var filter = $('#req-filter');
+    var sort = $('#req-sort');
 
     function upd_requests() {
         $.ajax({
@@ -19,6 +22,9 @@ $(document).ready(function(){
     function update_table(data){
         var content = '';
         var table_body = $('tbody');
+        if (sort_flag != 0){
+            sortArray(data, 'fields.priority', sort_flag)
+        }
         for (var i=0;i < data.length;i++) {
             if (priority_flag && data[i].fields.priority != '1') { continue; }
             content += '<tr>';
@@ -54,10 +60,53 @@ $(document).ready(function(){
         new_count = 0
     });
 
+    function sortArray(objArray, prop, direction){
+        if (arguments.length<2) throw new Error("sortArray requires 2 arguments");
+        var direct = arguments.length>2 ? arguments[2] : 1;
 
-    $('#req-filter').click(function(){
+        if (objArray && objArray.constructor===Array){
+            var propPath = (prop.constructor===Array) ? prop : prop.split(".");
+            objArray.sort(function(a,b){
+                for (var p in propPath){
+                    if (a[propPath[p]] && b[propPath[p]]){
+                        a = a[propPath[p]];
+                        b = b[propPath[p]];
+                    }
+                }
+                // convert numeric strings to integers
+                a = a.match(/^\d+$/) ? +a : a;
+                b = b.match(/^\d+$/) ? +b : b;
+                return ( (a < b) ? -1*direct : ((a > b) ? 1*direct : 0) );
+            });
+        }
+    }
+
+
+    filter.click(function(){
         priority_flag = !priority_flag;
-        $('#req-filter').toggleClass('glow', 'addOrRemove');
+        filter.toggleClass('glow', 'addOrRemove');
+        upd_requests();
+    });
+
+    sort.click(function(){
+        switch (sort_flag) {
+            case 0:
+                sort_flag = 1;
+                sort.addClass('glow');
+                sort.prepend('<div class="arrow-up"></div>');
+                break;
+            case 1:
+                sort_flag = -1;
+                $('.arrow-up').remove();
+                sort.prepend('<div class="arrow-down"></div>');
+                break;
+            case -1:
+                sort_flag = 0;
+                $('.arrow-down').remove();
+                sort.removeClass('glow');
+                break
+        }
+        console.log(sort_flag);
         upd_requests();
     });
 
