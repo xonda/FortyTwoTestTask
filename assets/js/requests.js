@@ -3,15 +3,16 @@ $(document).ready(function(){
     var title = $('title').text();
     var last_number = 0;
     var new_count = 0;
-    var priority_flag = false;
-    var sort_flag = 0;
+    //var priority_flag = false;
+    var sort_flag = -1;
     var filter = $('#req-filter');
     var sort = $('#req-sort');
 
     function upd_requests() {
         $.ajax({
             url: '/upd_requests',
-            dataType: "json"
+            dataType: "json",
+            data: { sort_flag: sort_flag}
         })
             .done(function(data){
                 update_table(data);
@@ -22,11 +23,8 @@ $(document).ready(function(){
     function update_table(data){
         var content = '';
         var table_body = $('tbody');
-        if (sort_flag != 0){
-            sortArray(data, 'fields.priority', sort_flag)
-        }
         for (var i=0;i < data.length;i++) {
-            if (priority_flag && data[i].fields.priority != '1') { continue; }
+            //if (priority_flag && data[i].fields.priority != '1') { continue; }
             content += '<tr>';
             content += '<td>' + data[i].pk + '</td>';
             content += '<td>' + data[i].fields.time + '</td>';
@@ -82,29 +80,28 @@ $(document).ready(function(){
     }
 
 
-    filter.click(function(){
-        priority_flag = !priority_flag;
-        filter.toggleClass('glow', 'addOrRemove');
-        upd_requests();
-    });
+    //filter.click(function(){
+    //    priority_flag = !priority_flag;
+    //    filter.toggleClass('glow', 'addOrRemove');
+    //    upd_requests();
+    //});
 
     sort.click(function(){
         switch (sort_flag) {
-            case 0:
+            case -1:
                 sort_flag = 1;
                 sort.addClass('glow');
-                sort.prepend('<div class="arrow-up"></div>');
+                sort.text('Sort (1)');
                 break;
             case 1:
-                sort_flag = -1;
-                $('.arrow-up').remove();
-                sort.prepend('<div class="arrow-down"></div>');
-                break;
-            case -1:
                 sort_flag = 0;
-                $('.arrow-down').remove();
+                sort.text('Sort (0)');
+                break;
+            case 0:
+                sort_flag = -1;
+                sort.text('Sort');
                 sort.removeClass('glow');
-                break
+                break;
         }
         console.log(sort_flag);
         upd_requests();

@@ -24,7 +24,14 @@ def upd_requests(request):
     if not request.is_ajax():
         return HttpResponse('Not ajax request')
 
-    last_10_reqs = WebRequest.objects.all().order_by('-id')[:10]
+    sort_flag = int(request.GET.get('sort_flag'))
+    print type(sort_flag)
+    if sort_flag >= 0:
+        last_10_reqs = WebRequest.objects.filter(priority=sort_flag).order_by('-id')[:10]
+    else:
+        last_10_reqs = WebRequest.objects.all().order_by('-id')[:10]
+
+
     if last_10_reqs:
         data = serializers.serialize("json", last_10_reqs)
         return HttpResponse(data, content_type='application/json')
