@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+    {% block extra_head %}
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <script src="http://malsup.github.com/jquery.form.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <!-- Latest compiled and minified Bootstrap CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
+        <!-- Latest compiled and minified Pootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+        <script src="{% static 'js/edit_info.js' %}"></script>
+    {% endblock extra_head %}
+
+
+
+    {% block content %}
+
+            <div class="container">
+                    <div class="row" id="navbar">
+                        <div class="col-lg-8"><h1>42 Coffee Cups Test Assignment</h1></div>
+                    </div>
+
+            <div id="edit-main-content">
+            <form id="edit_form" action="{% url 'edit_info' %}" enctype="multipart/form-data" method="post">
+
+            {% csrf_token %}
+
+                <div class="form_block">
+                    <div class="main">
+                        <div class="field">
+                            {{ form.name.label_tag }}
+                            {{ form.name }}
+                        </div>
+                        <div class="field">
+                            {{ form.surname.label_tag }}
+                            {{ form.surname }}
+                        </div>
+                        <div class="field">
+                            {{ form.dob.label_tag }}
+                            {{ form.dob }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_block">
+                    <div class="main">
+                        <div class="field">
+                            {{ form.email.label_tag }}
+                            {{ form.email }}
+                        </div>
+                        <div class="field">
+                            {{ form.jabber.label_tag }}
+                            {{ form.jabber }}
+                        </div>
+                        <div class="field">
+                            {{ form.skype.label_tag }}
+                            {{ form.skype }}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form_block" id="photo">
+                    <div class="main">
+                        <div class="field">{{ form.photo.label_tag }}{{ form.photo  }}</div>
+                    </div>
+                    <img id="preview" src="" alt="Photo preview" height="300" width="400">
+                </div>
+
+                <div class="form_block">
+                    <b><p>Other contacts:</p></b>
+                    {{ form.other }}
+                </div>
+
+                <div class="form_block">
+                    <b><p>Biography:</p></b>
+                    {{ form.bio }}
+                </div>
+
+                <div class="buttons_block">
+                    <button type="submit">Save</button>
+                    <a href="{% url 'home' %}">Cancel</a>
+                    <div id="ajaxwrapper"></div>
+                </div>
+
+            </form>
+            </div>
+            </div>
+
+
+        <hr>
+        <a href="{% url 'requests' %}" class="btn" id="req-btn" role="button">Requests</a>
+        {% endblock content %}

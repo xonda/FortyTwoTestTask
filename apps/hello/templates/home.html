@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}
+{% load staticfiles edit_link %}
 
 
     {% block extra_head %}
@@ -12,45 +12,63 @@
     {% endblock extra_head %}
 
 
+
     {% block content %}
 
             <div class="container">
                     <div class="row" id="navbar">
-                        <div class="col-lg-12"><h1>42 Coffee Cups Test Assignment</h1></div>
+                        <div class="col-lg-6"><h1>42 Coffee Cups Test Assignment</h1></div>
+                        <div class="col-lg-6 header">
+                            {% if user.is_authenticated %}
+                                    {% if info %}<a href="{% url 'edit_info' %}">Edit</a>
+                                        <a href="{% edit_link info %}">(admin)</a>
+                                    {% endif %}
+                                <a href="{% url 'logout' %}">Logout</a>
+                            {% else %}
+                                <a href="{% url 'login' %}">Login</a>
+                            {% endif %}
+                        </div>
                     </div>
 
 
             {% if not info %}<h3 id="nodata">Unfortunately there are no records in database</h3>
 
-            {% elif info %}
+            {% else %}
             <div id="main-content">
-            <div class="block" id="name-block">
-                <p>{{ info.name }}</p>
-                <p>{{ info.surname }}</p>
-                <p>{{ info.dob }}</p>
-            </div>
+                <div class="block" id="name-block">
+                    <p>{{ info.name }}</p>
+                    <p>{{ info.surname }}</p>
+                    <p>{{ info.dob }}</p>
+                    <p>Photo:</p>
+                </div>
 
-            <div class="block align-right">
-                <h3>Contacts</h3>
-                <p>Email: {{ info.email }}</p>
-                <p>Jabber: {{ info.jabber }}</p>
-                <p>Skype: {{ info.skype }}</p>
-            </div>
+                <div class="block">
+                    <h4>Contacts</h4>
+                    <p>Email: {{ info.email }}</p>
+                    <p>Jabber: {{ info.jabber }}</p>
+                    <p>Skype: {{ info.skype }}</p>
+                </div>
 
-            <div class="block">
-                <h3>Biography:</h3>
-                <div class="info_text">{{ info.bio|linebreaks }}</div>
-            </div>
+                <div class="block" id="photo">
+                    <img src='{% if info.photo.url == '/uploads/None' %} {% static 'img/default_image.png' %}
+                              {% else %} {{ info.photo.url }}
+                              {% endif %}' alt="Photo">
+                </div>
 
-            <div class="block">
-                <h3>Other Contacts:</h3>
-                <div class="info_text">{{ info.other|linebreaks }}</div>
+                <div class="block">
+                    <h4>Other Contacts:</h4>
+                    <div>{{ info.other|linebreaks }}</div>
+                </div>
+
+                <div class="block">
+                    <h4>Biography:</h4>
+                    <div>{{ info.bio|linebreaks }}</div>
+                </div>
             </div>
-        </div>
             {% endif %}
             </div>
 
-        <hr size="2">
-        <a href="{% url 'requests' %}" class="btn" role="button">requests</a>
+        <hr>
+        <a href="{% url 'requests' %}" class="btn" id="req-btn" role="button">Requests</a>
 
         {% endblock content %}

@@ -1,12 +1,12 @@
 body {
     padding: 2% 5% 2% 5%;
     background-color: #3498DB;
-    font-size: medium;
 }
 
 hr {
-    margin: 10px 0 10px 0;
+    margin: 10px 0 10px 27px;
     height: 2px;
+    width: 95.6%;
 }
 
 #navbar h1 {
@@ -20,10 +20,14 @@ a {
 
 div.block {
     width: 38%;
-    min-height: 150px;
+    min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 15px 15px 0 30px;
+    padding: 0 15px 10px 30px;
+}
+
+div.block p{
+    font-size: 0.9em;
 }
 
 div.form_block {
@@ -31,7 +35,15 @@ div.form_block {
     min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 10px 5px 0 0;
+    padding: 0 15px 10px 30px;
+}
+
+.block h3 {
+    margin-top: 0;
+}
+
+.block h4 {
+    margin-top: 0;
 }
 
 div.buttons_block {
@@ -43,12 +55,31 @@ div.buttons_block {
 
 #name-block {
     font-size: x-large;
+    margin: 0 10px 0 0;
+    padding-left: 30px;
+}
+
+#name-block {
+    font-size: large;
 }
 
 #nodata {
     color: red;
     padding-left: 25%;
     margin: 15% 0 15% 0;
+}
+
+#photo {
+    float: left;
+    margin-right: 4px;
+    min-height: 308px;
+    text-align: center;
+}
+
+.header{
+    padding-top: 35px;
+    display: inline;
+    text-align: center;
 }
 
 #photo {
@@ -132,4 +163,130 @@ img#preview {
     display: inline;
     color:  green;
     margin-left: 10px;
+}
+
+#main-content {
+    align-items: center;
+    margin: 2% 0 4% 0;
+    padding: 0 0 0 60px;
+}
+
+#edit-main-content {
+    margin: 2% 0 1% 0;
+
+}
+
+#navbar {
+    width: 99%;
+    border-bottom: 1px solid #3498DB;
+    margin: 0;
+}
+
+.field {
+    clear:both;
+    text-align: right;
+    line-height: 25px;
+}
+
+label {
+    float: left;
+    padding-right: 15px;
+    margin: 5px;
+}
+
+.main {
+    float:left;
+}
+
+textarea {
+   resize: none;
+}
+
+#my_photo {
+    margin-bottom: 10px;
+}
+
+button {
+    margin: 10px 10px 0 0;
+}
+
+.text_danger {
+    float: left;
+}
+
+input{
+    line-height: 25px;
+}
+
+.blink {
+    margin-left: 10px;
+    color: red;
+}
+
+img#preview {
+    width: 100%;
+    max-width: 400px;
+    max-height: 300px;
+}
+
+#ajaxwrapper {
+    display: inline;
+    color:  green;
+    margin-left: 10px;
+}
+
+#reqTable {
+    background: -webkit-linear-gradient(top, rgba(247,251,252,1) 0%,rgba(217,237,242,1) 40%,rgba(173,217,228,1) 100%);;
+    font-size: 0.80em;
+}
+
+#req-btn {
+    background-color: #DBEEF3;
+    margin-left: 30px;
+}
+
+#req-filter {
+    float: right;
+    margin: 0 10px 10px 0;
+    color: white;
+    cursor: pointer;
+}
+
+#req-sort {
+    float: right;
+    margin: 0 5px 10px 0;
+    color: white;
+    cursor: pointer;
+}
+
+span.text-danger ul {
+    font-size: x-small;
+    float: left;
+    padding-left: 10px;
+    margin-right: 5px;
+}
+
+.glow {
+	color: #fff;
+	text-shadow: -1px 1px 8px #ffc, 1px -1px 8px #fff;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: #ffffff transparent transparent transparent;
+    float: right;
+    margin-top: 7px;
+}
+
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 5px 5px 5px;
+    border-color: transparent transparent #ffffff transparent;
+    float: right;
+    margin-top: 7px;
 }

@@ -5,16 +5,17 @@
     {% block extra_head %}
         <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
         <script src="{% static 'js/requests.js' %}"></script>
-        <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
         <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
         <!-- Latest compiled and minified Pootstrap JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
     {% endblock extra_head %}
 
 
 {% block content %}
 
+        <div id="req-sort">Sort</div>
         <table id="reqTable" class="table table-bordered hidden">
             <thead>
                 <tr>
@@ -29,13 +30,14 @@
                     <td>Secure</td>
                     <td>Ajax</td>
                     <td>User</td>
+                    <td>Priority</td>
                 </tr>
             <thead>
 
             <tbody>
 
-
-
             </tbody>
-
+        </table>
+        <hr>
+        <a href="{% url 'home' %}" class="btn" id="req-btn" role="button">Back</a>
 {% endblock content %}

@@ -3,11 +3,16 @@ $(document).ready(function(){
     var title = $('title').text();
     var last_number = 0;
     var new_count = 0;
+    //var priority_flag = false;
+    var sort_flag = -1;
+    var filter = $('#req-filter');
+    var sort = $('#req-sort');
 
     function upd_requests() {
         $.ajax({
             url: '/upd_requests',
-            dataType: "json"
+            dataType: "json",
+            data: { sort_flag: sort_flag}
         })
             .done(function(data){
                 update_table(data);
@@ -19,6 +24,7 @@ $(document).ready(function(){
         var content = '';
         var table_body = $('tbody');
         for (var i=0;i < data.length;i++) {
+            //if (priority_flag && data[i].fields.priority != '1') { continue; }
             content += '<tr>';
             content += '<td>' + data[i].pk + '</td>';
             content += '<td>' + data[i].fields.time + '</td>';
@@ -31,6 +37,7 @@ $(document).ready(function(){
             content += '<td>' + data[i].fields.is_secure + '</td>';
             content += '<td>' + data[i].fields.is_ajax + '</td>';
             content += '<td>' + data[i].fields.user + '</td>';
+            content += '<td>' + data[i].fields.priority + '</td>';
             content += '</tr>';
         }
         table_body.html(content);
@@ -38,7 +45,7 @@ $(document).ready(function(){
 
 
         if (document.hidden) {
-            if (last_number < data[0].pk) {
+            if (last_number < data[0].pk && last_number != 0) {
                 new_count += data[0].pk - last_number;
                 $('title').text('(' + new_count + ') ' + title);
             }
@@ -49,6 +56,55 @@ $(document).ready(function(){
     $(window).focus(function(){
         $('title').text(title);
         new_count = 0
+    });
+
+    function sortArray(objArray, prop, direction){
+        if (arguments.length<2) throw new Error("sortArray requires 2 arguments");
+        var direct = arguments.length>2 ? arguments[2] : 1;
+
+        if (objArray && objArray.constructor===Array){
+            var propPath = (prop.constructor===Array) ? prop : prop.split(".");
+            objArray.sort(function(a,b){
+                for (var p in propPath){
+                    if (a[propPath[p]] && b[propPath[p]]){
+                        a = a[propPath[p]];
+                        b = b[propPath[p]];
+                    }
+                }
+                // convert numeric strings to integers
+                a = a.match(/^\d+$/) ? +a : a;
+                b = b.match(/^\d+$/) ? +b : b;
+                return ( (a < b) ? -1*direct : ((a > b) ? 1*direct : 0) );
+            });
+        }
+    }
+
+
+    //filter.click(function(){
+    //    priority_flag = !priority_flag;
+    //    filter.toggleClass('glow', 'addOrRemove');
+    //    upd_requests();
+    //});
+
+    sort.click(function(){
+        switch (sort_flag) {
+            case -1:
+                sort_flag = 1;
+                sort.addClass('glow');
+                sort.text('Sort (1)');
+                break;
+            case 1:
+                sort_flag = 0;
+                sort.text('Sort (0)');
+                break;
+            case 0:
+                sort_flag = -1;
+                sort.text('Sort');
+                sort.removeClass('glow');
+                break;
+        }
+        console.log(sort_flag);
+        upd_requests();
     });
 
     upd_requests();
