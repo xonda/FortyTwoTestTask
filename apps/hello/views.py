@@ -9,6 +9,8 @@ from .models import Info, WebRequest
 from .forms import InfoForm
 import signals
 
+__all__ = ['signals']
+
 
 def home(request):
     info = Info.objects.first()
@@ -27,7 +29,8 @@ def upd_requests(request):
     sort_flag = int(request.GET.get('sort_flag'))
 
     if sort_flag >= 0:
-        last_10_reqs = WebRequest.objects.filter(priority=sort_flag).order_by('-id')[:10]
+        last_10_reqs = WebRequest.objects.filter(priority=sort_flag)\
+            .order_by('-id')[:10]
     else:
         last_10_reqs = WebRequest.objects.all().order_by('-id')[:10]
 
@@ -43,7 +46,8 @@ def edit_info(request):
     info = Info.objects.first()
     if not info:
         return HttpResponse('No records in database')
-    form = InfoForm(request.POST or None, request.FILES or None, instance=info)
+    form = InfoForm(request.POST or None, request.FILES or None,
+                    instance=info)
     previous_photo = info.photo.path
 
     if not form.is_valid() and not form.errors:

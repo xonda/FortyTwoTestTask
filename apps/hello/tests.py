@@ -184,15 +184,16 @@ class EditInfoPageTests(TestCase):
         """
         client.login(username='admin', password='admin')
         response = client.post(reverse('edit_info'),
-               {"bio": "Several words",
-                "surname": "Lykov", "name": "Viktor",
-                "dob": "1986-01-22", "photo": "",
-                "other": "ICQ: 228339308",
-                "skype": "testerotuco",
-                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
-                "jabber": "xonda@khavr.com",
-                "email": "yamabushi@ukr.net"},
-               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+                               {"bio": "Several words",
+                                "surname": "Lykov", "name": "Viktor",
+                                "dob": "1986-01-22", "photo": "",
+                                "other": "ICQ: 228339308",
+                                "skype": "testerotuco",
+                                "csrfmiddlewaretoken":
+                                    "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                                "jabber": "xonda@khavr.com",
+                                "email": "yamabushi@ukr.net"},
+                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual('Changes have been saved', response.content)
 
     def test_post_is_invalid(self):
@@ -201,15 +202,17 @@ class EditInfoPageTests(TestCase):
         """
         client.login(username='admin', password='admin')
         response = client.post(reverse('edit_info'),
-               {"bio": "",
-                "surname": "Lykov", "name": "Viktor",
-                "dob": "1986", "photo": "",
-                "other": "ICQ: 228339308",
-                "skype": "testerotuco",
-                "csrfmiddlewaretoken": "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
-                "jabber": "xonda@khavr.com",
-                "email": "yamabushiukr.net"},
-               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+                               {"bio": "",
+                                "surname": "Lykov",
+                                "name": "Viktor",
+                                "dob": "1986", "photo": "",
+                                "other": "ICQ: 228339308",
+                                "skype": "testerotuco",
+                                "csrfmiddlewaretoken":
+                                    "OjJ63FVRl5o3vnjcLr610rGZ3NgYPiMv",
+                                "jabber": "xonda@khavr.com",
+                                "email": "yamabushiukr.net"},
+                               HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertIn('This field is required', response.content)
         self.assertIn('Enter a valid email address', response.content)
         self.assertIn('invalid date format', response.content)
@@ -217,23 +220,34 @@ class EditInfoPageTests(TestCase):
 
 class CusotmCommandsTest(TestCase):
     fixtures = ['superuser.json']
-    today = date.today().strftime('%d-%m-%Y')
-    filename = today + '.dat'
-    out = StringIO()
-    out_err = StringIO()
-    call_command('list_models', stdout=out, stderr=out_err)
-    subprocess.call('./list-models.sh')
+
+    def setUp(self):
+        today = date.today().strftime('%d-%m-%Y')
+        self.filename = today + '.dat'
+        self.out = StringIO()
+        self.out_err = StringIO()
+        call_command('list_models', stdout=self.out, stderr=self.out_err)
+        subprocess.call('./list-models.sh')
 
     def test_list_models_command(self):
+        """
+        Test if command lists models
+        """
         self.assertIn('Info - 3 records', self.out.getvalue())
         self.assertIn('User - 1 records', self.out.getvalue())
         self.assertIn('error: Info - 3 records', self.out_err.getvalue())
         self.assertIn('error: User - 1 records', self.out_err.getvalue())
 
     def test_list_model_save_file(self):
+        """
+        Test if script saves models to file
+        """
         self.assertTrue(os.path.isfile(self.filename))
 
     def test_list_model_file_contents(self):
+        """
+        Test saved file contents
+        """
         with open(self.filename, 'rb') as f:
             file_content = f.read()
             self.assertIn('error: User - 1 records', file_content)
@@ -242,12 +256,18 @@ class CusotmCommandsTest(TestCase):
 
 class SignalProcessorTest(TestCase):
     def test_delete_object_signal(self):
+        """
+        Test delete object signal is saved
+        """
         Info.objects.all()[0].delete()
         record = DatabaseLog.objects.latest('date')
         self.assertEqual('Info', record.model)
         self.assertEqual('delete', record.action)
 
     def test_edit_object_signal(self):
+        """
+        Test edit object signal is saved
+        """
         obj = Info.objects.all()[0]
         obj.name = 'Teddy'
         obj.save()
@@ -256,6 +276,9 @@ class SignalProcessorTest(TestCase):
         self.assertEqual('edit', record.action)
 
     def test_create_object_signal(self):
+        """
+        Test create object signal is saved
+        """
         obj = Info(name='Tom', surname='Waits', dob='1986-01-22',
                    bio='BlahBlah', email='tw@mail.com',
                    jabber='tomw', skype='tomw', other='foo')
@@ -265,6 +288,9 @@ class SignalProcessorTest(TestCase):
         self.assertEqual('create', record.action)
 
     def test_edit_signal_not_doubled(self):
+        """
+        Test edit object signal is not doubled
+        """
         DatabaseLog.objects.all().delete()
         obj = Info.objects.all()[0]
         obj.name = 'Teddy'
@@ -272,6 +298,9 @@ class SignalProcessorTest(TestCase):
         self.assertNotEqual(2, DatabaseLog.objects.all().count())
 
     def test_delete_signal_not_doubled(self):
+        """
+        Test delete object signal is not doubled
+        """
         DatabaseLog.objects.all().delete()
         obj = Info.objects.all()[0]
         obj.name = 'Teddy'

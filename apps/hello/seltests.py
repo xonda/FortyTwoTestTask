@@ -23,7 +23,6 @@ class RequestsPageTests(TestCase):
         req_filter.click()
         self.assertNotIn(" AnonymousUser 0", tbody.text)
 
-
     def tearDown(self):
         self.driver.close()
 
