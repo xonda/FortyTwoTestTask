@@ -11,11 +11,6 @@ hr {
 
 #navbar h1 {
     padding-bottom: 5px;
-    border-bottom: 1px solid #3498DB;
-}
-
-a {
-    background-color: #DBEEF3;
 }
 
 div.block {
@@ -23,7 +18,7 @@ div.block {
     min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 0 15px 10px 30px;
+    padding: 0px 15px 10px 30px;
 }
 
 div.block p{
@@ -35,7 +30,7 @@ div.form_block {
     min-height: 110px;
     vertical-align: top;
     display: inline-block;
-    padding: 0 15px 10px 30px;
+    padding: 0px 15px 10px 30px;
 }
 
 .block h3 {
@@ -50,11 +45,6 @@ div.buttons_block {
     width: 38%;
     vertical-align: bottom;
     display: block;
-    margin: 10px 10px 0 0;
-}
-
-#name-block {
-    font-size: x-large;
     margin: 0 10px 0 0;
     padding-left: 30px;
 }
@@ -82,19 +72,6 @@ div.buttons_block {
     text-align: center;
 }
 
-#photo {
-    float: left;
-    margin-right: 4px;
-    min-height: 308px;
-    text-align: center;
-}
-
-.header{
-    padding-top: 35px;
-    display: inline;
-    text-align: center;
-}
-
 .header a {
     margin: 0 10px 0 10px;
     display: inline;
@@ -106,63 +83,6 @@ div.buttons_block {
     padding: 0 10px 0 20px;
     height: 100%;
     min-height: 550px;
-}
-
-#main-content {
-    align-items: center;
-    margin: 2% 0 4% 0;
-    padding: 0 0 0 60px;
-}
-
-.field {
-    clear:both;
-    text-align: right;
-    line-height: 25px;
-}
-
-label {
-    float: left;
-    padding-right: 15px;
-    margin: 5px;
-}
-
-.main {
-    float:left;
-}
-
-textarea {
-   resize: none;
-}
-
-#my_photo {
-    margin-bottom: 10px;
-}
-
-button {
-    margin: 10px 10px 0 0;
-}
-
-.text_danger {
-    float: left;
-}
-
-input{
-    line-height: 25px;
-}
-
-.blink {
-    margin-left: 10px;
-    color: red;
-}
-
-img#preview {
-    width: 100%;
-}
-
-#ajaxwrapper {
-    display: inline;
-    color:  green;
-    margin-left: 10px;
 }
 
 #main-content {
