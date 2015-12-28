@@ -19,8 +19,8 @@ class RequestsPageTests(TestCase):
         self.assertIn(' GET ', tbody.text)
         self.assertIn(' {} ', tbody.text)
         self.assertIn(" AnonymousUser 0", tbody.text)
-        req_filter = self.driver.find_element_by_id("req-filter")
-        req_filter.click()
+        req_sort = self.driver.find_element_by_id("req-sort")
+        req_sort.click()
         self.assertNotIn(" AnonymousUser 0", tbody.text)
 
     def tearDown(self):
