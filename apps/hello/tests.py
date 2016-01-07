@@ -119,8 +119,6 @@ class RequestsMiddlewareTest(TestCase):
 
 
 class EditInfoPageTests(TestCase):
-    fixtures = ['superuser.json']
-
     def test_edit_page_available(self):
         """
         Test if edit info page redirects to login
@@ -219,8 +217,6 @@ class EditInfoPageTests(TestCase):
 
 
 class CusotmCommandsTest(TestCase):
-    fixtures = ['superuser.json']
-
     def setUp(self):
         today = date.today().strftime('%d-%m-%Y')
         self.filename = today + '.dat'

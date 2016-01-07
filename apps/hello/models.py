@@ -1,3 +1,4 @@
+import os
 from django.db import models
 from PIL import Image
 
@@ -14,6 +15,7 @@ class Info(models.Model):
     photo = models.ImageField(upload_to='info', default='None')
 
     def save(self):
+        previous_photo = self.photo.path
         super(Info, self).save()
         try:
             pw = self.photo.width
@@ -26,7 +28,9 @@ class Info(models.Model):
                     image = Image.open(filename)
                     image.thumbnail((mw, mh), Image.ANTIALIAS)
                     image.save(filename)
-        except IOError:
+            if previous_photo != self.photo.path:
+                os.remove(previous_photo)
+        except:
             return
 
     def __unicode__(self):

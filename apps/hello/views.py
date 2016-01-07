@@ -1,5 +1,4 @@
 import json
-import os
 import time
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -48,7 +47,6 @@ def edit_info(request):
         return HttpResponse('No records in database')
     form = InfoForm(request.POST or None, request.FILES or None,
                     instance=info)
-    previous_photo = info.photo.path
 
     if not form.is_valid() and not form.errors:
         context = {
@@ -58,13 +56,7 @@ def edit_info(request):
 
     if form.is_valid():
         form.save()
-        try:
-            if previous_photo != info.photo.path:
-                os.remove(previous_photo)
-        except Exception, e:
-            print str(e)
         if request.is_ajax():
-            time.sleep(3)
             return HttpResponse('Changes have been saved')
         else:
             return redirect('home')

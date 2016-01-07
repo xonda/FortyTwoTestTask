@@ -95,7 +95,7 @@ $(document).ready(function(){
     var blink = $('.blink');
     blink.fadeOut(500);
     blink.fadeIn(500);
-}
+    }
 
 
 
