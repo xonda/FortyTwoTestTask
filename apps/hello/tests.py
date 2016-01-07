@@ -240,15 +240,6 @@ class CusotmCommandsTest(TestCase):
         """
         self.assertTrue(os.path.isfile(self.filename))
 
-    def test_list_model_file_contents(self):
-        """
-        Test saved file contents
-        """
-        with open(self.filename, 'rb') as f:
-            file_content = f.read()
-            self.assertIn('error: User - 1 records', file_content)
-            self.assertIn('error: Info - 3 records', file_content)
-
 
 class SignalProcessorTest(TestCase):
     def test_delete_object_signal(self):
