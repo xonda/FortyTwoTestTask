@@ -74,6 +74,7 @@ $(document).ready(function(){
                     }
     };
 
+
     $('#edit_form').ajaxForm(edit_info_options);
 
     function beforeSubmit(formData, jqForm, options) {
