@@ -3,7 +3,6 @@ $(document).ready(function(){
     var title = $('title').text();
     var last_number = 0;
     var new_count = 0;
-    //var priority_flag = false;
     var sort_flag = -1;
     var filter = $('#req-filter');
     var sort = $('#req-sort');
@@ -24,7 +23,6 @@ $(document).ready(function(){
         var content = '';
         var table_body = $('tbody');
         for (var i=0;i < data.length;i++) {
-            //if (priority_flag && data[i].fields.priority != '1') { continue; }
             content += '<tr>';
             content += '<td>' + data[i].pk + '</td>';
             content += '<td>' + data[i].fields.time + '</td>';
@@ -79,12 +77,6 @@ $(document).ready(function(){
         }
     }
 
-
-    //filter.click(function(){
-    //    priority_flag = !priority_flag;
-    //    filter.toggleClass('glow', 'addOrRemove');
-    //    upd_requests();
-    //});
 
     sort.click(function(){
         switch (sort_flag) {
